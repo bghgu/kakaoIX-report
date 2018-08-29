@@ -2,7 +2,7 @@ package com.kakaoix.report.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * Created by ds on 2018-08-29.
@@ -10,5 +10,14 @@ import javax.persistence.Entity;
 
 @Data
 @Entity
+@Table(name = "user")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int user_idx;
+
+    private String name;
+
+    private String password;
 }
