@@ -1,8 +1,9 @@
 package com.kakaoix.report.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.kakaoix.report.model.DefaultRes;
+import com.kakaoix.report.model.UserDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by ds on 2018-08-29.
@@ -12,5 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("users")
 public class UserController {
 
+    @GetMapping("/{user_idx}")
+    public ResponseEntity<DefaultRes<Object>> getUsers(@PathVariable final int user_idx) {
 
+        return null;
+    }
+
+    @PostMapping("")
+    public ResponseEntity<DefaultRes> postUsers(@RequestBody final UserDto userDto) {
+
+        return null;
+    }
 }
