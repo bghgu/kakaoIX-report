@@ -1,8 +1,10 @@
-package com.kakaoix.report.utils;
+package com.kakaoix.report.service;
 
+import com.kakaoix.report.utils.SHA512EncryptUtils;
 import io.jsonwebtoken.*;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -16,7 +18,8 @@ import java.util.Map;
  * Created by ds on 2018-08-31.
  */
 
-public class JwtUtils {
+@Service
+public class JwtService {
 
     @Value("{JWT.SALT")
     private String SALT;
@@ -32,7 +35,6 @@ public class JwtUtils {
                 .compact();
         return jwt;
     }
-
 
     public Map<String, Object> getToken(String key) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
@@ -69,7 +71,7 @@ public class JwtUtils {
     private Date getTime() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.add(Calendar.HOUR, 1);
+        cal.add(Calendar.HOUR, 24);
         return cal.getTime();
     }
 }

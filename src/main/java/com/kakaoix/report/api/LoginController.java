@@ -1,7 +1,7 @@
 package com.kakaoix.report.api;
 
-import com.kakaoix.report.model.res.DefaultRes;
-import com.kakaoix.report.model.req.UserDto;
+import com.kakaoix.report.model.DefaultRes;
+import com.kakaoix.report.model.UserDto;
 import com.kakaoix.report.service.LoginService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;

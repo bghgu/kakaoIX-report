@@ -1,7 +1,7 @@
 package com.kakaoix.report.service;
 
 import com.kakaoix.report.domain.Product;
-import com.kakaoix.report.model.res.DefaultRes;
+import com.kakaoix.report.model.DefaultRes;
 import org.springframework.data.domain.PageRequest;
 
 /**

@@ -17,6 +17,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     private static final String[] EXCLUDE_PATH = {
             "/login",
+            ""
     };
 
     private final JwtInterceptor jwtInterceptor;
@@ -26,10 +27,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         this.jwtInterceptor = jwtInterceptor;
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns(EXCLUDE_PATH);
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(jwtInterceptor)
+//                .addPathPatterns("/**")
+//                .excludePathPatterns(EXCLUDE_PATH);
+//    }
 }

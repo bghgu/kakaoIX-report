@@ -1,8 +1,8 @@
 package com.kakaoix.report.service.Impl;
 
 import com.kakaoix.report.domain.User;
-import com.kakaoix.report.model.req.UserDto;
-import com.kakaoix.report.model.res.DefaultRes;
+import com.kakaoix.report.model.UserDto;
+import com.kakaoix.report.model.DefaultRes;
 import com.kakaoix.report.repository.UserRepository;
 import com.kakaoix.report.service.UserService;
 import com.kakaoix.report.utils.ResponseMessage;
@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService<User> {
     public DefaultRes<User> save(final UserDto userDto) {
         final String encryptPw = SHA512EncryptUtils.encrypt(userDto.getPassword());
         final User user = User.builder().email(userDto.getEmail()).password(encryptPw).name(userDto.getName()).build();
-        return DefaultRes.<User>builder().statusCode(StatusCode.CREATED).responseMessage(ResponseMessage.CREATED).responseData(userRepository.save(user)).build();
+        userRepository.save(user);
+        return DefaultRes.<User>builder().statusCode(StatusCode.CREATED).responseMessage(ResponseMessage.CREATED).build();
     }
 }

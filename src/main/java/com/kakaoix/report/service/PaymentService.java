@@ -1,7 +1,7 @@
 package com.kakaoix.report.service;
 
-import com.kakaoix.report.model.res.DefaultRes;
-import com.kakaoix.report.model.req.PaymentDto;
+import com.kakaoix.report.model.DefaultRes;
+import com.kakaoix.report.model.PaymentDto;
 
 /**
  * Created by ds on 2018-08-30.

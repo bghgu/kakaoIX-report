@@ -1,4 +1,4 @@
-package com.kakaoix.report.model.req;
+package com.kakaoix.report.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

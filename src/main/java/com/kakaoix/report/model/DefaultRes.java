@@ -1,4 +1,4 @@
-package com.kakaoix.report.model.res;
+package com.kakaoix.report.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
