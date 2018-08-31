@@ -10,18 +10,18 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "item")
-public class Item {
+@Table(name = "product")
+public class Product {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int item_idx;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int product_idx;
 
     private String name;
 
     private int price;
 
-    private String img;
-
     private String intro;
+
+    private String img;
 }

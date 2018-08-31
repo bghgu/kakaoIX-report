@@ -1,12 +1,15 @@
-package com.kakaoix.report.model;
+package com.kakaoix.report.model.res;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * Created by ds on 2018-08-29.
  */
 
-@Data
+@Getter
+@NoArgsConstructor
 public class DefaultRes<T> {
 
     //재정의한 Response StatusCode
@@ -17,8 +20,6 @@ public class DefaultRes<T> {
 
     //Response Data
     private T responseData;
-
-    public DefaultRes() {}
 
     public DefaultRes(final int statusCode, final String responseMessage, final T responseData) {
         this.statusCode = statusCode;
@@ -32,15 +33,4 @@ public class DefaultRes<T> {
         this.responseData = null;
     }
 
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public String getResponseMessage() {
-        return responseMessage;
-    }
-
-    public T getResponseData() {
-        return responseData;
-    }
 }

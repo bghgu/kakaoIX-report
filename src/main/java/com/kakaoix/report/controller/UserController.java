@@ -1,7 +1,7 @@
 package com.kakaoix.report.controller;
 
-import com.kakaoix.report.model.DefaultRes;
-import com.kakaoix.report.model.UserDto;
+import com.kakaoix.report.model.res.DefaultRes;
+import com.kakaoix.report.model.req.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @GetMapping("/{user_idx}")
-    public ResponseEntity<DefaultRes<Object>> getUsers(@PathVariable final int user_idx) {
-
+    public ResponseEntity<DefaultRes> getUsers(@PathVariable final int user_idx) {
         return null;
     }
 
     @PostMapping("")
     public ResponseEntity<DefaultRes> postUsers(@RequestBody final UserDto userDto) {
-
         return null;
     }
 }
