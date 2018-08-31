@@ -31,6 +31,12 @@ public class LoginServiceImpl implements LoginService {
         this.jwtService = jwtService;
     }
 
+    /**
+     * 로그인
+     * @param email
+     * @param password
+     * @return
+     */
     @Override
     public DefaultRes<TokenDto> login(final String email, final String password) {
         final String encryptPw = SHA512EncryptUtils.encrypt(password);
@@ -43,6 +49,10 @@ public class LoginServiceImpl implements LoginService {
         return DefaultRes.<TokenDto>builder().statusCode(StatusCode.NOT_FOUND).responseMessage(ResponseMessage.NOT_FOUND).build();
     }
 
+    /**
+     * 로그아웃
+     * @return
+     */
     @Override
     public DefaultRes logout() {
         return null;

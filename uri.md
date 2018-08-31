@@ -28,9 +28,9 @@
 
 ## Payments
 
-| 메소드 | 경로                                         | 설명           |
-| ------ | -------------------------------------------- | -------------- |
-| GET    | /payments?offset={page_no}&limit={page_size} | 결제 내역 조회 |
-| GET    | /payements/{payment_idx}                     | 결제 상세 조회 |
-| POST   | /payments                                    | 상품 결제      |
+| 메소드 | 경로                                         | 설명           | 필수 |
+| ------ | -------------------------------------------- | -------------- | ---- |
+| GET    | /payments?offset={page_no}&limit={page_size} | 결제 내역 조회 | O    |
+| GET    | /payments/{payment_idx}                      | 결제 상세 조회 | O    |
+| POST   | /payments                                    | 상품 결제      | O    |
 

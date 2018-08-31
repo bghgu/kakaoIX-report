@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService<User> {
         this.userRepository = userRepository;
     }
 
+    /**
+     * 회원 정보 상세 조회
+     * @param user_idx
+     * @return
+     */
     @Override
     public DefaultRes<User> findOne(final int user_idx) {
         final Optional<User> user = userRepository.findById(user_idx);
@@ -36,6 +41,11 @@ public class UserServiceImpl implements UserService<User> {
         return DefaultRes.<User>builder().statusCode(StatusCode.NOT_FOUND).responseMessage(ResponseMessage.NOT_FOUND).build();
     }
 
+    /**
+     * 회원 가입
+     * @param userDto
+     * @return
+     */
     @Override
     public DefaultRes<User> save(final UserDto userDto) {
         final String encryptPw = SHA512EncryptUtils.encrypt(userDto.getPassword());

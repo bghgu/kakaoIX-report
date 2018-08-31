@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("users")
 public class UserController {
 
-    private static final DefaultRes<User> FAIL_DEFAULE_RES = new DefaultRes<User>(StatusCode.INTERNAL_SERVER_ERROR, ResponseMessage.INTERNAL_SERVER_ERROR);
+    private static final DefaultRes<User> FAIL_DEFAULT_RES = new DefaultRes<User>(StatusCode.INTERNAL_SERVER_ERROR, ResponseMessage.INTERNAL_SERVER_ERROR);
 
     private final UserService<User> userService;
 
@@ -34,7 +34,7 @@ public class UserController {
             return new ResponseEntity<DefaultRes<User>>(userService.findOne(user_idx), HttpStatus.OK);
         }catch(Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<DefaultRes<User>>(FAIL_DEFAULE_RES, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<DefaultRes<User>>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -44,7 +44,7 @@ public class UserController {
             return new ResponseEntity<DefaultRes<User>>(userService.save(userDto), HttpStatus.OK);
         }catch(Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<DefaultRes<User>>(FAIL_DEFAULE_RES, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<DefaultRes<User>>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
