@@ -7,5 +7,4 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CorsData {
 
-
 }

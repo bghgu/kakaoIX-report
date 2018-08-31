@@ -8,6 +8,6 @@ import com.kakaoix.report.model.res.DefaultRes;
  */
 
 public interface LoginService {
-    DefaultRes<User> login(final String id, final String password);
+    DefaultRes<User> login(final String email, final String password);
     DefaultRes<User> logout();
 }

@@ -8,7 +8,6 @@ import lombok.Setter;
  */
 
 @Data
-@Setter
 public class DefaultResBuilder<T> {
 	
 	// 재정의한 Response StatusCode

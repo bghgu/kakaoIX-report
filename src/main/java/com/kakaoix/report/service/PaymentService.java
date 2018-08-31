@@ -9,6 +9,8 @@ import com.kakaoix.report.model.req.PaymentDto;
 
 public interface PaymentService<Payment> {
     DefaultRes<Payment> findAll();
-    DefaultRes<Payment> findOne(final int idx);
+
+    DefaultRes<Payment> findOne(final int payment_idx);
+
     DefaultRes<Payment> payment(final PaymentDto paymentDto);
 }

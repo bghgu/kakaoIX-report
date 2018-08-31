@@ -1,5 +1,6 @@
 package com.kakaoix.report.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@Builder
 @Table(name = "user")
 public class User {
 
@@ -19,7 +21,7 @@ public class User {
 
     private String name;
 
-    private String id;
+    private String email;
 
     private String password;
 }
