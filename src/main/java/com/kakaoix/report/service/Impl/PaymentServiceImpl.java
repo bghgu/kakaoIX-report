@@ -11,6 +11,7 @@ import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -35,7 +36,8 @@ public class PaymentServiceImpl implements PaymentService {
      */
     @Override
     public DefaultRes<Iterable<Payment>> findAll() {
-        Iterable<Payment> paymentIterable = paymentRepository.findAll();
+        final int user_idx = 1;
+        Iterable<Payment> paymentIterable = paymentRepository.findByUser_idx(user_idx);
         return DefaultRes.<Iterable<Payment>>builder()
                 .statusCode(StatusCode.OK)
                 .responseMessage(ResponseMessage.READ)
@@ -65,6 +67,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public DefaultRes<Payment> payment(final PaymentDto paymentDto) {
         //final int user_idx = jwtService.getAuthId("login");
+        final Map<String, Object> value = jwtService.getToken("login");
         final Payment payment = Payment.builder().user_idx(1).product_idx(paymentDto.getProduct_idx()).quantity(paymentDto.getQuantity()).build();
         paymentRepository.save(payment);
         return DefaultRes.<Payment>builder().statusCode(StatusCode.CREATED).responseMessage(ResponseMessage.CREATED).build();

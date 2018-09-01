@@ -11,6 +11,7 @@ public class ResponseMessage {
     public static final String READ = "Success Find User";
     public static final String CREATED = "Success Save User";
     public static final String NOT_FOUND = "Not Find User";
+    public static final String ALREADY = "Already User";
 
     public static final String INTERNAL_SERVER_ERROR = "Fail";
 }

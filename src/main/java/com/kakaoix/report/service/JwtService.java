@@ -25,7 +25,7 @@ public class JwtService {
     private String SALT;
 
     public <T> String createToken(final T data, final String key) {
-        String jwt = Jwts.builder()
+        final String jwt = Jwts.builder()
                 .setHeaderParam("type", "JWT")
                 .setHeaderParam("regDate", System.currentTimeMillis())
                 .setId(key)
@@ -36,9 +36,9 @@ public class JwtService {
         return jwt;
     }
 
-    public Map<String, Object> getToken(String key) {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        String jwt = request.getHeader("Authorization");
+    public Map<String, Object> getToken(final String key) {
+        final HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        final String jwt = request.getHeader("Authorization");
         Jws<Claims> claims = null;
         try {
             claims = Jwts.parser()
@@ -48,7 +48,7 @@ public class JwtService {
             //throw new UnauthorizedException();
         }
         @SuppressWarnings("unchecked")
-        Map<String, Object> value = (LinkedHashMap<String, Object>)claims.getBody().get(key);
+        final Map<String, Object> value = (LinkedHashMap<String, Object>)claims.getBody().get(key);
         return value;
     }
 
@@ -58,7 +58,7 @@ public class JwtService {
 
     public boolean isValuedToken(final String jwt) {
         try {
-            Jws<Claims> claims = Jwts.parser()
+            final Jws<Claims> claims = Jwts.parser()
                     .setSigningKey(SHA512EncryptUtils.encrypt(SALT))
                     .parseClaimsJws(jwt);
             return true;

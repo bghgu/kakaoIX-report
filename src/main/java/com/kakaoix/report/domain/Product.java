@@ -23,5 +23,5 @@ public class Product {
 
     private String intro;
 
-    private String img;
+    private String image;
 }

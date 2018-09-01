@@ -28,9 +28,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
 //    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(jwtInterceptor)
-//                .addPathPatterns("/**")
-//                .excludePathPatterns(EXCLUDE_PATH);
-//    }
+////    public void addInterceptors(InterceptorRegistry registry) {
+////        registry.addInterceptor(jwtInterceptor)
+////                .addPathPatterns("/**")
+////                .excludePathPatterns(EXCLUDE_PATH);
+////    }
 }

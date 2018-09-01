@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService<User> {
 
     /**
      * 회원 정보 상세 조회
+     *
      * @param user_idx
      * @return
      */
@@ -43,14 +44,19 @@ public class UserServiceImpl implements UserService<User> {
 
     /**
      * 회원 가입
+     *
      * @param userDto
      * @return
      */
     @Override
     public DefaultRes<User> save(final UserDto userDto) {
+        final Optional<User> checkUser = userRepository.findByEmail(userDto.getEmail());
+        if (checkUser.isPresent()) {
+            return DefaultRes.<User>builder().statusCode(StatusCode.NO_CONTENT).responseMessage(ResponseMessage.ALREADY).build();
+        }
         final String encryptPw = SHA512EncryptUtils.encrypt(userDto.getPassword());
-        final User user = User.builder().email(userDto.getEmail()).password(encryptPw).name(userDto.getName()).build();
-        userRepository.save(user);
+        final User saveUser = User.builder().email(userDto.getEmail()).password(encryptPw).name(userDto.getName()).build();
+        userRepository.save(saveUser);
         return DefaultRes.<User>builder().statusCode(StatusCode.CREATED).responseMessage(ResponseMessage.CREATED).build();
     }
 }

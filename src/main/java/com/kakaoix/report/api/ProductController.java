@@ -42,9 +42,9 @@ public class ProductController {
 
 
     @GetMapping("/{product_idx}")
-    public ResponseEntity<DefaultRes<Product>> getUsers(@PathVariable final int product_id) {
+    public ResponseEntity<DefaultRes<Product>> getUsers(@PathVariable final int product_idx) {
         try {
-            return new ResponseEntity<DefaultRes<Product>>(productService.findOne(product_id), HttpStatus.OK);
+            return new ResponseEntity<DefaultRes<Product>>(productService.findOne(product_idx), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<DefaultRes<Product>>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
