@@ -52,9 +52,16 @@ public class ProductServiceImpl implements ProductService {
     public DefaultRes<Product> findOne(final int product_idx) {
         final Optional<Product> product = productRepository.findById(product_idx);
         if (product.isPresent()) {
-            return DefaultRes.<Product>builder().statusCode(StatusCode.OK).responseMessage(ResponseMessage.READ).responseData(product.get()).build();
+            return DefaultRes.<Product>builder()
+                    .statusCode(StatusCode.OK)
+                    .responseMessage(ResponseMessage.READ)
+                    .responseData(product.get())
+                    .build();
         }
-        return DefaultRes.<Product>builder().statusCode(StatusCode.NOT_FOUND).responseMessage(ResponseMessage.NOT_FOUND).build();
+        return DefaultRes.<Product>builder()
+                .statusCode(StatusCode.NOT_FOUND)
+                .responseMessage(ResponseMessage.NOT_FOUND)
+                .build();
     }
 
     public DefaultRes<Product> test(PageRequest pageRequest) {

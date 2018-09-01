@@ -6,6 +6,7 @@ import com.kakaoix.report.model.UserDto;
 import com.kakaoix.report.service.UserService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
+import com.kakaoix.report.utils.auth.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/{user_idx}")
+    @Auth
     public ResponseEntity<DefaultRes<User>> getUsers(@PathVariable final int user_idx) {
         try {
             return new ResponseEntity<DefaultRes<User>>(userService.findOne(user_idx), HttpStatus.OK);

@@ -3,6 +3,7 @@ package com.kakaoix.report.api;
 import com.kakaoix.report.model.DefaultRes;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
+import com.kakaoix.report.utils.auth.Auth;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,7 @@ public class PaymentController {
     }
 
     @PostMapping("")
+    @Auth
     public ResponseEntity<DefaultRes> payment() {
         return null;
     }

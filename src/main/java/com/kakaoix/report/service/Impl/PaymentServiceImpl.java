@@ -1,17 +1,14 @@
 package com.kakaoix.report.service.Impl;
 
 import com.kakaoix.report.domain.Payment;
-import com.kakaoix.report.domain.Product;
 import com.kakaoix.report.model.DefaultRes;
 import com.kakaoix.report.model.PaymentDto;
 import com.kakaoix.report.repository.PaymentRepository;
-import com.kakaoix.report.service.JwtService;
 import com.kakaoix.report.service.PaymentService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -21,12 +18,9 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
 
-    private final JwtService jwtService;
-
     @Autowired
-    public PaymentServiceImpl(final PaymentRepository paymentRepository, final JwtService jwtService) {
+    public PaymentServiceImpl(final PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
-        this.jwtService = jwtService;
     }
 
     /**
@@ -37,7 +31,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public DefaultRes<Iterable<Payment>> findAll() {
         final int user_idx = 1;
-        Iterable<Payment> paymentIterable = paymentRepository.findByUser_idx(user_idx);
+        Iterable<Payment> paymentIterable = null;
         return DefaultRes.<Iterable<Payment>>builder()
                 .statusCode(StatusCode.OK)
                 .responseMessage(ResponseMessage.READ)
@@ -54,9 +48,16 @@ public class PaymentServiceImpl implements PaymentService {
     public DefaultRes<Payment> findOne(final int payment_idx) {
         final Optional<Payment> payment = paymentRepository.findById(payment_idx);
         if (payment.isPresent()) {
-            return DefaultRes.<Payment>builder().statusCode(StatusCode.OK).responseMessage(ResponseMessage.READ).responseData(payment.get()).build();
+            return DefaultRes.<Payment>builder()
+                    .statusCode(StatusCode.OK)
+                    .responseMessage(ResponseMessage.READ)
+                    .responseData(payment.get())
+                    .build();
         }
-        return DefaultRes.<Payment>builder().statusCode(StatusCode.NOT_FOUND).responseMessage(ResponseMessage.NOT_FOUND).build();
+        return DefaultRes.<Payment>builder()
+                .statusCode(StatusCode.NOT_FOUND)
+                .responseMessage(ResponseMessage.NOT_FOUND)
+                .build();
     }
 
     /**
@@ -66,10 +67,15 @@ public class PaymentServiceImpl implements PaymentService {
      */
     @Override
     public DefaultRes<Payment> payment(final PaymentDto paymentDto) {
-        //final int user_idx = jwtService.getAuthId("login");
-        final Map<String, Object> value = jwtService.getToken("login");
-        final Payment payment = Payment.builder().user_idx(1).product_idx(paymentDto.getProduct_idx()).quantity(paymentDto.getQuantity()).build();
+        final Payment payment = Payment.builder()
+                .userIdx(1)
+                .productIdx(paymentDto.getProduct_idx())
+                .quantity(paymentDto.getQuantity())
+                .build();
         paymentRepository.save(payment);
-        return DefaultRes.<Payment>builder().statusCode(StatusCode.CREATED).responseMessage(ResponseMessage.CREATED).build();
+        return DefaultRes.<Payment>builder()
+                .statusCode(StatusCode.CREATED)
+                .responseMessage(ResponseMessage.CREATED)
+                .build();
     }
 }

@@ -4,11 +4,11 @@ import com.kakaoix.report.domain.User;
 import com.kakaoix.report.model.DefaultRes;
 import com.kakaoix.report.model.TokenDto;
 import com.kakaoix.report.repository.UserRepository;
-import com.kakaoix.report.service.JwtService;
 import com.kakaoix.report.service.LoginService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.SHA512EncryptUtils;
 import com.kakaoix.report.utils.StatusCode;
+import com.kakaoix.report.utils.auth.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +23,9 @@ public class LoginServiceImpl implements LoginService {
 
     private final UserRepository userRepository;
 
-    private final JwtService jwtService;
-
     @Autowired
-    public LoginServiceImpl(final UserRepository userRepository, final JwtService jwtService) {
+    public LoginServiceImpl(final UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.jwtService = jwtService;
     }
 
     /**
@@ -43,10 +40,15 @@ public class LoginServiceImpl implements LoginService {
         final Optional<User> user = userRepository.findByEmailAndPassword(email, encryptPw);
         if (user.isPresent()) {
             user.get().setPassword("");
-            final TokenDto token = new TokenDto(jwtService.createToken(user.get(), "token"));
-            return DefaultRes.<TokenDto>builder().statusCode(StatusCode.OK).responseMessage(ResponseMessage.READ).responseData(token).build();
+            final TokenDto tokenDto = new TokenDto(Jwt.create(user.get().getUserIdx()));
+            return DefaultRes.<TokenDto>builder()
+                    .statusCode(StatusCode.OK)
+                    .responseMessage(ResponseMessage.LOGIN_SUCCESS)
+                    .responseData(tokenDto).build();
         }
-        return DefaultRes.<TokenDto>builder().statusCode(StatusCode.NOT_FOUND).responseMessage(ResponseMessage.NOT_FOUND).build();
+        return DefaultRes.<TokenDto>builder()
+                .statusCode(StatusCode.NOT_FOUND)
+                .responseMessage(ResponseMessage.LOGIN_FAIL).build();
     }
 
     /**

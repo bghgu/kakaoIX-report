@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.kakaoix.report.utils.auth.Jwt;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -42,7 +40,7 @@ public class AuthAspect {
             return new ResponseEntity<DefaultRes>(DEFAULT_RES, HttpStatus.SERVICE_UNAVAILABLE);
         }
 
-        Token token = Jwt.decode(jwt);
+        final Jwt.Token token = Jwt.decode(jwt);
 
         if (token == null) {
             return new ResponseEntity<DefaultRes>(DEFAULT_RES, HttpStatus.SERVICE_UNAVAILABLE);

@@ -8,32 +8,25 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.Data;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Created by ds on 2018-09-01.
  */
 
-@Data
 public class Jwt {
 
     private static final Logger LOG = Logger.getLogger(Jwt.class.getSimpleName());
 
-    private static final String ISSUER = "hitit";
-    private static final String SECRET = "tmvmfld!";
+    private static final String ISSUER = "kakaoIX";
 
-    /**
-     * Methods to create json web token string object.
-     *
-     * @param uidx
-     * @return
-     */
-    public static String create(final long uidx) {
-        LOG.debug("create");
+    private static final String SECRET = "vji2k@#49cn292mfo@!$mxiap@#mknvldkm3$";
+
+    public static String create(final int user_idx) {
         try {
             JWTCreator.Builder b = com.auth0.jwt.JWT.create();
             b.withIssuer(ISSUER);
-            b.withClaim("uidx", uidx);
-
+            b.withClaim("user_idx", user_idx);
             return b.sign(Algorithm.HMAC256(SECRET));
         } catch (JWTCreationException jce) {
             LOG.error(jce.getMessage());
@@ -42,19 +35,11 @@ public class Jwt {
         return null;
     }
 
-    /**
-     * Methods to decode json web token and return token object.
-     *
-     * @param token
-     * @return
-     */
     public static Token decode(final String token) {
-        LOG.debug("decode");
-
         try {
             JWTVerifier v = com.auth0.jwt.JWT.require(Algorithm.HMAC256(SECRET)).withIssuer(ISSUER).build();
             DecodedJWT djwt = v.verify(token);
-            return new Token(djwt.getClaim("uidx").asLong().longValue());
+            return new Token(djwt.getClaim("user_idx").asLong().intValue());
         } catch (JWTVerificationException jve) {
             LOG.error(jve.getMessage());
         } catch (Exception e) {
@@ -65,22 +50,17 @@ public class Jwt {
     }
 
     public static class Token {
-        private static final Logger LOG = Logger.getLogger(Token.class.getSimpleName());
-
-        private long uidx;
+        private int user_idx;
 
         public Token() {
         }
 
-        public Token(final long uidx) {
-            LOG.debug("Token");
-
-            this.uidx = uidx;
+        public Token(final int user_idx) {
+            this.user_idx = user_idx;
         }
 
-        public long getUidx() {
-            LOG.debug("getUidx");
-            return uidx;
+        public int getUser_idx() {
+            return user_idx;
         }
     }
 }

@@ -6,6 +6,7 @@ import com.kakaoix.report.model.UserDto;
 import com.kakaoix.report.service.LoginService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
+import com.kakaoix.report.utils.auth.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,7 @@ public class LoginController {
     }
 
     @GetMapping("logout")
+    @Auth
     public ResponseEntity<DefaultRes> logout() {
         try {
             return new ResponseEntity<DefaultRes>(loginService.logout(), HttpStatus.OK);

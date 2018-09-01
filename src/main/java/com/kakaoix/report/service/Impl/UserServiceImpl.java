@@ -37,9 +37,16 @@ public class UserServiceImpl implements UserService<User> {
     public DefaultRes<User> findOne(final int user_idx) {
         final Optional<User> user = userRepository.findById(user_idx);
         if (user.isPresent()) {
-            return DefaultRes.<User>builder().statusCode(StatusCode.OK).responseMessage(ResponseMessage.READ).responseData(user.get()).build();
+            return DefaultRes.<User>builder()
+                    .statusCode(StatusCode.OK)
+                    .responseMessage(ResponseMessage.READ)
+                    .responseData(user.get())
+                    .build();
         }
-        return DefaultRes.<User>builder().statusCode(StatusCode.NOT_FOUND).responseMessage(ResponseMessage.NOT_FOUND).build();
+        return DefaultRes.<User>builder()
+                .statusCode(StatusCode.NOT_FOUND)
+                .responseMessage(ResponseMessage.NOT_FOUND)
+                .build();
     }
 
     /**
@@ -52,11 +59,21 @@ public class UserServiceImpl implements UserService<User> {
     public DefaultRes<User> save(final UserDto userDto) {
         final Optional<User> checkUser = userRepository.findByEmail(userDto.getEmail());
         if (checkUser.isPresent()) {
-            return DefaultRes.<User>builder().statusCode(StatusCode.NO_CONTENT).responseMessage(ResponseMessage.ALREADY).build();
+            return DefaultRes.<User>builder()
+                    .statusCode(StatusCode.NO_CONTENT)
+                    .responseMessage(ResponseMessage.ALREADY)
+                    .build();
         }
         final String encryptPw = SHA512EncryptUtils.encrypt(userDto.getPassword());
-        final User saveUser = User.builder().email(userDto.getEmail()).password(encryptPw).name(userDto.getName()).build();
+        final User saveUser = User.builder()
+                .email(userDto.getEmail())
+                .password(encryptPw)
+                .name(userDto.getName())
+                .build();
         userRepository.save(saveUser);
-        return DefaultRes.<User>builder().statusCode(StatusCode.CREATED).responseMessage(ResponseMessage.CREATED).build();
+        return DefaultRes.<User>builder()
+                .statusCode(StatusCode.CREATED)
+                .responseMessage(ResponseMessage.CREATED)
+                .build();
     }
 }

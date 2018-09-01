@@ -1,5 +1,6 @@
 package com.kakaoix.report.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,13 +19,16 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int payment_idx;
+    private int paymentIdx;
 
-    private int user_idx;
+    private int userIdx;
 
-    private int product_idx;
+    private int productIdx;
 
     private int quantity;
 
     private LocalDateTime payment_at;
+
+    @OneToOne(mappedBy = "payment", fetch = FetchType.EAGER)
+    private User user;
 }
