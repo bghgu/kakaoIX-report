@@ -8,9 +8,7 @@ import lombok.Data;
 
 @Data
 public class PaymentDto {
-
-    private int user_idx;
-    private int product_idx;
+    private int userIdx;
+    private int productIdx;
     private int quantity;
-
 }

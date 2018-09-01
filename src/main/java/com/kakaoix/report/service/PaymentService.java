@@ -10,9 +10,9 @@ import com.kakaoix.report.model.PaymentDto;
  */
 
 public interface PaymentService {
-    DefaultRes<Iterable<Payment>> findAll();
+    DefaultRes<Iterable<Payment>> findAll(final int userIdx);
 
-    DefaultRes<Payment> findOne(final int payment_idx);
+    DefaultRes<Payment> findOne(final int userIdx, final int payment_idx);
 
     DefaultRes<Payment> payment(final PaymentDto paymentDto);
 }

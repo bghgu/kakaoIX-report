@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 회원 정보 상세 조회
-     *
      * @param user_idx
      * @return
      */

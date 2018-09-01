@@ -38,15 +38,4 @@ public class LoginController {
             return new ResponseEntity<DefaultRes<TokenDto>>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @GetMapping("logout")
-    @Auth
-    public ResponseEntity<DefaultRes> logout() {
-        try {
-            return new ResponseEntity<DefaultRes>(loginService.logout(), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<DefaultRes>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }

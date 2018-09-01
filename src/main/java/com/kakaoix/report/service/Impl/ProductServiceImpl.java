@@ -9,7 +9,6 @@ import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +35,9 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public DefaultRes<Iterable<Product>> findAll(final Pagenation pagenation) {
-        PageRequest pr = new PageRequest(1, 3, new Sort(
+        PageRequest pageRequest = new PageRequest(1, 3, new Sort(
                 new Sort.Order(Sort.Direction.DESC, "productIdx")));
-        Iterable<Product> productIterable = productRepository.findAll(pr);
+        Iterable<Product> productIterable = productRepository.findAll(pageRequest);
         return DefaultRes.<Iterable<Product>>builder()
                 .statusCode(StatusCode.OK)
                 .responseMessage(ResponseMessage.READ_PRODUCT_LIST)
@@ -48,12 +47,12 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 세부 조회
-     * @param product_idx
+     * @param productIdx
      * @return
      */
     @Override
-    public DefaultRes<Product> findOne(final int product_idx) {
-        final Optional<Product> product = productRepository.findById(product_idx);
+    public DefaultRes<Product> findOne(final int productIdx) {
+        final Optional<Product> product = productRepository.findById(productIdx);
         if (product.isPresent()) {
             return DefaultRes.<Product>builder()
                     .statusCode(StatusCode.OK)
@@ -67,8 +66,14 @@ public class ProductServiceImpl implements ProductService {
                 .build();
     }
 
-    public void test(PageRequest pageRequest) {
-
+    /**
+     *
+     * @param productIdx
+     * @return
+     */
+    @Override
+    public Optional<Product> getProduct(final int productIdx) {
+        return productRepository.findById(productIdx);
     }
 
 }

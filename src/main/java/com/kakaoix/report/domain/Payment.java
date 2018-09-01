@@ -1,8 +1,11 @@
 package com.kakaoix.report.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kakaoix.report.model.PaymentDto;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,7 +16,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Builder
+@AllArgsConstructor
 @Table(name = "payment")
 public class Payment {
 
@@ -27,8 +30,17 @@ public class Payment {
 
     private int quantity;
 
+    private double total_price;
+
     private LocalDateTime payment_at;
 
-    @OneToOne(mappedBy = "payment", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "productIdx", insertable = false, updatable = false)
     private Product product;
+
+    public Payment(final PaymentDto paymentDto) {
+        this.userIdx = paymentDto.getUserIdx();
+        this.productIdx = paymentDto.getProductIdx();
+        this.quantity = paymentDto.getQuantity();
+    }
 }

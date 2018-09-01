@@ -24,7 +24,7 @@
 
 | 메소드 | 경로                                                | 설명           | 필수 | 구현 |
 | ------ | --------------------------------------------------- | -------------- | ---- | ---- |
-| GET    | /payments?offset={offset}&limit={limit}&sort={sort} | 결제 내역 조회 | O    |      |
-| GET    | /payments/{payment_idx}                             | 결제 상세 조회 | O    |      |
-| POST   | /payments                                           | 상품 결제      | O    |      |
+| GET    | /payments?offset={offset}&limit={limit}&sort={sort} | 결제 내역 조회 | O    | ?    |
+| GET    | /payments/{payment_idx}                             | 결제 상세 조회 | O    | O    |
+| POST   | /payments                                           | 상품 결제      | O    | O    |
 

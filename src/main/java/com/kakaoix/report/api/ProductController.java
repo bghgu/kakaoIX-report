@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
  * Created by ds on 2018-08-31.
  */
 
-@Slf4j
 @RestController
 @RequestMapping("products")
 public class ProductController {
@@ -37,9 +36,6 @@ public class ProductController {
             @RequestParam(value = "sort", defaultValue = "desc", required = false) final String sort
     ) {
         try {
-            log.info("offset : " + offset);
-            log.info("limit : " + limit);
-            log.info("sort : " + sort);
             final Pagenation pagenation = Pagenation.builder().offset(offset).limit(limit).sort(sort).build();
             return new ResponseEntity<DefaultRes<Iterable<Product>>>(productService.findAll(pagenation), HttpStatus.OK);
         } catch (Exception e) {
@@ -50,7 +46,7 @@ public class ProductController {
 
 
     @GetMapping("/{product_idx}")
-    public ResponseEntity<DefaultRes<Product>> getUsers(@PathVariable final int product_idx) {
+    public ResponseEntity<DefaultRes<Product>> getProduct(@PathVariable final int product_idx) {
         try {
             return new ResponseEntity<DefaultRes<Product>>(productService.findOne(product_idx), HttpStatus.OK);
         } catch (Exception e) {

@@ -59,13 +59,12 @@ public class AuthAspect {
         }
 
         Object[] params = pjp.getArgs();
+        Object[] rerunParams = new Object[params.length+1];
 
         for (int i = 0; i < params.length; i++) {
-            if (params[i] instanceof User) {
-                params[i] = user;
-                break;
-            }
+            rerunParams[i] = params[i];
         }
+        rerunParams[params.length] = user.get();
 
         return pjp.proceed(params);
     }

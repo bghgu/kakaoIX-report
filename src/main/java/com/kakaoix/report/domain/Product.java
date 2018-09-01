@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by ds on 2018-08-29.
@@ -27,7 +28,6 @@ public class Product {
     private String image;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productIdx")
-    private Payment payment;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<Payment> payment;
 }
