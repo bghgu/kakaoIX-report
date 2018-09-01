@@ -30,5 +30,5 @@ public class Payment {
     private LocalDateTime payment_at;
 
     @OneToOne(mappedBy = "payment", fetch = FetchType.EAGER)
-    private User user;
+    private Product product;
 }

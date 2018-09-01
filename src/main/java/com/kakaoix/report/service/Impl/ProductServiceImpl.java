@@ -2,12 +2,15 @@ package com.kakaoix.report.service.Impl;
 
 import com.kakaoix.report.domain.Product;
 import com.kakaoix.report.model.DefaultRes;
+import com.kakaoix.report.model.Pagenation;
 import com.kakaoix.report.repository.ProductRepository;
 import com.kakaoix.report.service.ProductService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -28,17 +31,17 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 전체 조회
-     * 페이지네이션 작업 안함
-     * @param page_no
-     * @param page_size
+     * @param pagenation
      * @return
      */
     @Override
-    public DefaultRes<Iterable<Product>> findAll(final int page_no, final int page_size) {
-        Iterable<Product> productIterable = productRepository.findAll();
+    public DefaultRes<Iterable<Product>> findAll(final Pagenation pagenation) {
+        PageRequest pr = new PageRequest(1, 3, new Sort(
+                new Sort.Order(Sort.Direction.DESC, "productIdx")));
+        Iterable<Product> productIterable = productRepository.findAll(pr);
         return DefaultRes.<Iterable<Product>>builder()
                 .statusCode(StatusCode.OK)
-                .responseMessage(ResponseMessage.READ)
+                .responseMessage(ResponseMessage.READ_PRODUCT_LIST)
                 .responseData(productIterable)
                 .build();
     }
@@ -54,17 +57,18 @@ public class ProductServiceImpl implements ProductService {
         if (product.isPresent()) {
             return DefaultRes.<Product>builder()
                     .statusCode(StatusCode.OK)
-                    .responseMessage(ResponseMessage.READ)
+                    .responseMessage(ResponseMessage.READ_PRODUCT)
                     .responseData(product.get())
                     .build();
         }
         return DefaultRes.<Product>builder()
                 .statusCode(StatusCode.NOT_FOUND)
-                .responseMessage(ResponseMessage.NOT_FOUND)
+                .responseMessage(ResponseMessage.NOT_FOUND_PRODUCT)
                 .build();
     }
 
-    public DefaultRes<Product> test(PageRequest pageRequest) {
-        return null;
+    public void test(PageRequest pageRequest) {
+
     }
+
 }

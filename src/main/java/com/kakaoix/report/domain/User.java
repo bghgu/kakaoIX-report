@@ -25,10 +25,4 @@ public class User {
     private String email;
 
     private String password;
-
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userIdx")
-    private Payment payment;
-
 }

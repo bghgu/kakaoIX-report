@@ -8,12 +8,15 @@ import com.kakaoix.report.service.PaymentService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 /**
  * Created by ds on 2018-08-31.
  */
+
+@Service
 public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
@@ -31,10 +34,10 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public DefaultRes<Iterable<Payment>> findAll() {
         final int user_idx = 1;
-        Iterable<Payment> paymentIterable = null;
+        Iterable<Payment> paymentIterable = paymentRepository.findByUserIdx(user_idx);
         return DefaultRes.<Iterable<Payment>>builder()
                 .statusCode(StatusCode.OK)
-                .responseMessage(ResponseMessage.READ)
+                .responseMessage(ResponseMessage.READ_PAYMENT_LIST)
                 .responseData(paymentIterable)
                 .build();
     }
@@ -50,13 +53,13 @@ public class PaymentServiceImpl implements PaymentService {
         if (payment.isPresent()) {
             return DefaultRes.<Payment>builder()
                     .statusCode(StatusCode.OK)
-                    .responseMessage(ResponseMessage.READ)
+                    .responseMessage(ResponseMessage.READ_PAYMENT)
                     .responseData(payment.get())
                     .build();
         }
         return DefaultRes.<Payment>builder()
                 .statusCode(StatusCode.NOT_FOUND)
-                .responseMessage(ResponseMessage.NOT_FOUND)
+                .responseMessage(ResponseMessage.NOT_FOUND_PAYMENT)
                 .build();
     }
 
@@ -75,7 +78,7 @@ public class PaymentServiceImpl implements PaymentService {
         paymentRepository.save(payment);
         return DefaultRes.<Payment>builder()
                 .statusCode(StatusCode.CREATED)
-                .responseMessage(ResponseMessage.CREATED)
+                .responseMessage(ResponseMessage.PAYMENT_SUCCESS)
                 .build();
     }
 }

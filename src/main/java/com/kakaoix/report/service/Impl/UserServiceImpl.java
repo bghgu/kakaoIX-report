@@ -3,6 +3,7 @@ package com.kakaoix.report.service.Impl;
 import com.kakaoix.report.domain.User;
 import com.kakaoix.report.model.UserDto;
 import com.kakaoix.report.model.DefaultRes;
+import com.kakaoix.report.model.UserRes;
 import com.kakaoix.report.repository.UserRepository;
 import com.kakaoix.report.service.UserService;
 import com.kakaoix.report.utils.ResponseMessage;
@@ -18,7 +19,7 @@ import java.util.Optional;
  */
 
 @Service
-public class UserServiceImpl implements UserService<User> {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
@@ -34,18 +35,23 @@ public class UserServiceImpl implements UserService<User> {
      * @return
      */
     @Override
-    public DefaultRes<User> findOne(final int user_idx) {
+    public DefaultRes<UserRes> findOne(final int user_idx) {
         final Optional<User> user = userRepository.findById(user_idx);
         if (user.isPresent()) {
-            return DefaultRes.<User>builder()
+            UserRes userRes = UserRes.builder()
+                    .userIdx(user.get().getUserIdx())
+                    .email(user.get().getEmail())
+                    .name(user.get().getName())
+                    .build();
+            return DefaultRes.<UserRes>builder()
                     .statusCode(StatusCode.OK)
-                    .responseMessage(ResponseMessage.READ)
-                    .responseData(user.get())
+                    .responseMessage(ResponseMessage.READ_USER)
+                    .responseData(userRes)
                     .build();
         }
-        return DefaultRes.<User>builder()
+        return DefaultRes.<UserRes>builder()
                 .statusCode(StatusCode.NOT_FOUND)
-                .responseMessage(ResponseMessage.NOT_FOUND)
+                .responseMessage(ResponseMessage.NOT_FOUND_USER)
                 .build();
     }
 
@@ -61,7 +67,7 @@ public class UserServiceImpl implements UserService<User> {
         if (checkUser.isPresent()) {
             return DefaultRes.<User>builder()
                     .statusCode(StatusCode.NO_CONTENT)
-                    .responseMessage(ResponseMessage.ALREADY)
+                    .responseMessage(ResponseMessage.ALREADY_USER)
                     .build();
         }
         final String encryptPw = SHA512EncryptUtils.encrypt(userDto.getPassword());
@@ -73,7 +79,12 @@ public class UserServiceImpl implements UserService<User> {
         userRepository.save(saveUser);
         return DefaultRes.<User>builder()
                 .statusCode(StatusCode.CREATED)
-                .responseMessage(ResponseMessage.CREATED)
+                .responseMessage(ResponseMessage.CREATED_USER)
                 .build();
+    }
+
+    @Override
+    public Optional<User> getUser(final int user_idx) {
+        return userRepository.findById(user_idx);
     }
 }

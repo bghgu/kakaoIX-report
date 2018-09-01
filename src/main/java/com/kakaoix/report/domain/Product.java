@@ -1,5 +1,6 @@
 package com.kakaoix.report.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,4 +25,9 @@ public class Product {
     private String intro;
 
     private String image;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "productIdx")
+    private Payment payment;
 }

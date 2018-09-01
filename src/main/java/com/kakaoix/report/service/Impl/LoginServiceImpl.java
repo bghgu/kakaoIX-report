@@ -47,7 +47,7 @@ public class LoginServiceImpl implements LoginService {
                     .responseData(tokenDto).build();
         }
         return DefaultRes.<TokenDto>builder()
-                .statusCode(StatusCode.NOT_FOUND)
+                .statusCode(StatusCode.BAD_REQUEST)
                 .responseMessage(ResponseMessage.LOGIN_FAIL).build();
     }
 
