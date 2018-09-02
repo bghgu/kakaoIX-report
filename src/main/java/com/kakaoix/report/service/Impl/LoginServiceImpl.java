@@ -50,13 +50,4 @@ public class LoginServiceImpl implements LoginService {
                 .statusCode(StatusCode.BAD_REQUEST)
                 .responseMessage(ResponseMessage.LOGIN_FAIL).build();
     }
-
-    /**
-     * 로그아웃
-     * @return
-     */
-    @Override
-    public DefaultRes logout() {
-        return null;
-    }
 }

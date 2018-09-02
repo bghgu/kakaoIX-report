@@ -2,7 +2,7 @@ package com.kakaoix.report.service;
 
 import com.kakaoix.report.domain.User;
 import com.kakaoix.report.model.DefaultRes;
-import com.kakaoix.report.model.UserDto;
+import com.kakaoix.report.model.SignUpDto;
 import com.kakaoix.report.model.UserRes;
 
 import java.util.Optional;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface UserService {
     DefaultRes<UserRes> findOne(final int user_idx);
 
-    DefaultRes<User> save(final UserDto userDto);
+    DefaultRes save(final SignUpDto signUpDto);
 
     Optional<User> getUser(final int user_idx);
 }

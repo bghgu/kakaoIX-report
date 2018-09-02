@@ -3,14 +3,16 @@ package com.kakaoix.report.service.Impl;
 import com.kakaoix.report.domain.Payment;
 import com.kakaoix.report.domain.Product;
 import com.kakaoix.report.model.DefaultRes;
+import com.kakaoix.report.model.Pagination;
 import com.kakaoix.report.model.PaymentDto;
 import com.kakaoix.report.repository.PaymentRepository;
 import com.kakaoix.report.service.PaymentService;
 import com.kakaoix.report.service.ProductService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,7 +21,6 @@ import java.util.Optional;
  * Created by ds on 2018-08-31.
  */
 
-@Slf4j
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -35,14 +36,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     /**
      * 결제 내역 전체 조회
-     * 페이지네이션 작업 안함
-     *
      * @return
      */
     @Override
-    public DefaultRes<Iterable<Payment>> findAll(final int userIdx) {
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        Iterable<Payment> paymentIterable = paymentRepository.findByUserIdx(userIdx);
+    public DefaultRes<Iterable<Payment>> findAll(final int userIdx, final Pagination pagination) {
+        Iterable<Payment> paymentIterable = paymentRepository.findByUserIdx(userIdx, pagination);
         return DefaultRes.<Iterable<Payment>>builder()
                 .statusCode(StatusCode.OK)
                 .responseMessage(ResponseMessage.READ_PAYMENT_LIST)

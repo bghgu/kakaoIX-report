@@ -2,14 +2,12 @@ package com.kakaoix.report.service.Impl;
 
 import com.kakaoix.report.domain.Product;
 import com.kakaoix.report.model.DefaultRes;
-import com.kakaoix.report.model.Pagenation;
+import com.kakaoix.report.model.Pagination;
 import com.kakaoix.report.repository.ProductRepository;
 import com.kakaoix.report.service.ProductService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -30,14 +28,12 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 전체 조회
-     * @param pagenation
+     * @param pagination
      * @return
      */
     @Override
-    public DefaultRes<Iterable<Product>> findAll(final Pagenation pagenation) {
-        PageRequest pageRequest = new PageRequest(1, 3, new Sort(
-                new Sort.Order(Sort.Direction.DESC, "productIdx")));
-        Iterable<Product> productIterable = productRepository.findAll(pageRequest);
+    public DefaultRes<Iterable<Product>> findAll(final Pagination pagination) {
+        Iterable<Product> productIterable = productRepository.findAll(pagination);
         return DefaultRes.<Iterable<Product>>builder()
                 .statusCode(StatusCode.OK)
                 .responseMessage(ResponseMessage.READ_PRODUCT_LIST)

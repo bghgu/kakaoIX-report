@@ -2,11 +2,10 @@ package com.kakaoix.report.api;
 
 import com.kakaoix.report.model.DefaultRes;
 import com.kakaoix.report.model.TokenDto;
-import com.kakaoix.report.model.UserDto;
+import com.kakaoix.report.model.SignUpDto;
 import com.kakaoix.report.service.LoginService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
-import com.kakaoix.report.utils.auth.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +29,9 @@ public class LoginController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<DefaultRes<TokenDto>> login(@RequestBody final UserDto userDto) {
+    public ResponseEntity<DefaultRes<TokenDto>> login(@RequestBody final SignUpDto signUpDto) {
         try {
-            return new ResponseEntity<DefaultRes<TokenDto>>(loginService.login(userDto.getEmail(), userDto.getPassword()), HttpStatus.OK);
+            return new ResponseEntity<DefaultRes<TokenDto>>(loginService.login(signUpDto.getEmail(), signUpDto.getPassword()), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<DefaultRes<TokenDto>>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);

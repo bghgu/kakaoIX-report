@@ -1,7 +1,7 @@
 package com.kakaoix.report.service.Impl;
 
 import com.kakaoix.report.domain.User;
-import com.kakaoix.report.model.UserDto;
+import com.kakaoix.report.model.SignUpDto;
 import com.kakaoix.report.model.DefaultRes;
 import com.kakaoix.report.model.UserRes;
 import com.kakaoix.report.repository.UserRepository;
@@ -57,23 +57,23 @@ public class UserServiceImpl implements UserService {
     /**
      * 회원 가입
      *
-     * @param userDto
+     * @param signUpDto
      * @return
      */
     @Override
-    public DefaultRes<User> save(final UserDto userDto) {
-        final Optional<User> checkUser = userRepository.findByEmail(userDto.getEmail());
+    public DefaultRes save(final SignUpDto signUpDto) {
+        final Optional<User> checkUser = userRepository.findByEmail(signUpDto.getEmail());
         if (checkUser.isPresent()) {
             return DefaultRes.<User>builder()
                     .statusCode(StatusCode.NO_CONTENT)
                     .responseMessage(ResponseMessage.ALREADY_USER)
                     .build();
         }
-        final String encryptPw = SHA512EncryptUtils.encrypt(userDto.getPassword());
+        final String encryptPw = SHA512EncryptUtils.encrypt(signUpDto.getPassword());
         final User saveUser = User.builder()
-                .email(userDto.getEmail())
+                .email(signUpDto.getEmail())
                 .password(encryptPw)
-                .name(userDto.getName())
+                .name(signUpDto.getName())
                 .build();
         userRepository.save(saveUser);
         return DefaultRes.<User>builder()

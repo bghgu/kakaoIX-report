@@ -2,7 +2,7 @@ package com.kakaoix.report.api;
 
 import com.kakaoix.report.domain.User;
 import com.kakaoix.report.model.DefaultRes;
-import com.kakaoix.report.model.UserDto;
+import com.kakaoix.report.model.SignUpDto;
 import com.kakaoix.report.model.UserRes;
 import com.kakaoix.report.service.UserService;
 import com.kakaoix.report.utils.ResponseMessage;
@@ -43,12 +43,12 @@ public class UserController {
     }
 
     @PostMapping("")
-    public ResponseEntity<DefaultRes<User>> postUsers(@RequestBody final UserDto userDto) {
+    public ResponseEntity<DefaultRes> postUsers(@RequestBody final SignUpDto signUpDto) {
         try {
-            return new ResponseEntity<DefaultRes<User>>(userService.save(userDto), HttpStatus.OK);
+            return new ResponseEntity<DefaultRes>(userService.save(signUpDto), HttpStatus.OK);
         }catch(Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<DefaultRes<User>>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<DefaultRes>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
