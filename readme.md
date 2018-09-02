@@ -2,6 +2,9 @@
 
 전체 API : https://github.com/bghgu/kakaoIX-report/wiki
 
+현재 서버 배포중에 있습니다.
+bghgu.tk:8080
+
 ## URI
 
 ### Users
@@ -81,7 +84,9 @@ Payments API : https://github.com/bghgu/kakaoIX-report/wiki/Payments
 
 ## 실행하기
 
-window 10 환경
+window 10 환경 기준
+
+8080 포트를 사용합니다.
 
 - `jdk8` 과 `maven` 을 설치합니다.
 - `JAVA_JOME` 환경변수 설정을 합니다.
