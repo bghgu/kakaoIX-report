@@ -3,7 +3,12 @@
 전체 API : https://github.com/bghgu/kakaoIX-report/wiki
 
 현재 서버 배포중에 있습니다.
+
 bghgu.tk:8080
+
+![db.jpg](https://github.com/project-cowalker/project-cowalker-server/blob/master/img/logical%20db.jpg)
+
+* 논리적 DB 모델링
 
 ## URI
 
