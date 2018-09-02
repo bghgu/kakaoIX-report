@@ -9,7 +9,7 @@ import org.springframework.data.domain.Sort;
  */
 
 @Builder
-public class Pagination implements Pageable{
+public class Pagination implements Pageable {
 
     private int offset;
     private int limit;

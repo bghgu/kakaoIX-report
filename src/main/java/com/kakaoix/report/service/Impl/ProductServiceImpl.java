@@ -28,6 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 전체 조회
+     *
      * @param pagination
      * @return
      */
@@ -42,13 +43,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 상품 세부 조회
+     * 상품 정보 조회
+     *
      * @param productIdx
      * @return
      */
     @Override
     public DefaultRes<Product> findOne(final int productIdx) {
-        final Optional<Product> product = productRepository.findById(productIdx);
+        final Optional<Product> product = getProduct(productIdx);
         if (product.isPresent()) {
             return DefaultRes.<Product>builder()
                     .statusCode(StatusCode.OK)
@@ -63,6 +65,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
+     * 상품 정보 조회
      *
      * @param productIdx
      * @return

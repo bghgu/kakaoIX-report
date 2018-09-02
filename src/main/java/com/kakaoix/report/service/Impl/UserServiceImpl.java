@@ -1,8 +1,8 @@
 package com.kakaoix.report.service.Impl;
 
 import com.kakaoix.report.domain.User;
-import com.kakaoix.report.model.SignUpDto;
 import com.kakaoix.report.model.DefaultRes;
+import com.kakaoix.report.model.SignUpDto;
 import com.kakaoix.report.model.UserRes;
 import com.kakaoix.report.repository.UserRepository;
 import com.kakaoix.report.service.UserService;
@@ -30,12 +30,13 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 회원 정보 상세 조회
+     *
      * @param user_idx
      * @return
      */
     @Override
     public DefaultRes<UserRes> findOne(final int user_idx) {
-        final Optional<User> user = userRepository.findById(user_idx);
+        final Optional<User> user = getUser(user_idx);
         if (user.isPresent()) {
             UserRes userRes = UserRes.builder()
                     .userIdx(user.get().getUserIdx())
@@ -82,6 +83,12 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
+    /**
+     * 회원 조회
+     *
+     * @param user_idx
+     * @return
+     */
     @Override
     public Optional<User> getUser(final int user_idx) {
         return userRepository.findById(user_idx);

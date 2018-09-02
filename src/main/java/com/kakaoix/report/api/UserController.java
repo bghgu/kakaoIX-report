@@ -36,7 +36,7 @@ public class UserController {
     public ResponseEntity<DefaultRes<UserRes>> getUsers(@PathVariable final int user_idx) {
         try {
             return new ResponseEntity<DefaultRes<UserRes>>(userService.findOne(user_idx), HttpStatus.OK);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<DefaultRes<UserRes>>((MultiValueMap<String, String>) FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -46,7 +46,7 @@ public class UserController {
     public ResponseEntity<DefaultRes> postUsers(@RequestBody final SignUpDto signUpDto) {
         try {
             return new ResponseEntity<DefaultRes>(userService.save(signUpDto), HttpStatus.OK);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<DefaultRes>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
         }

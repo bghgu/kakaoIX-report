@@ -1,15 +1,18 @@
 package com.kakaoix.report.api;
 
 import com.kakaoix.report.model.DefaultRes;
-import com.kakaoix.report.model.TokenDto;
 import com.kakaoix.report.model.SignUpDto;
+import com.kakaoix.report.model.TokenDto;
 import com.kakaoix.report.service.LoginService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by ds on 2018-08-29.

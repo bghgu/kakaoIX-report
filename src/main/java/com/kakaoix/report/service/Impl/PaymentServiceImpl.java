@@ -11,9 +11,8 @@ import com.kakaoix.report.service.ProductService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -36,6 +35,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     /**
      * 결제 내역 전체 조회
+     *
      * @return
      */
     @Override
@@ -82,10 +82,11 @@ public class PaymentServiceImpl implements PaymentService {
      * @param paymentDto
      * @return
      */
+    @Transactional
     @Override
     public DefaultRes<Payment> payment(final PaymentDto paymentDto) {
         final Optional<Product> product = productService.getProduct(paymentDto.getProductIdx());
-        if(!product.isPresent()) {
+        if (!product.isPresent()) {
             return DefaultRes.<Payment>builder()
                     .statusCode(StatusCode.BAD_REQUEST)
                     .responseMessage(ResponseMessage.NOT_FOUND_PRODUCT)
@@ -94,7 +95,14 @@ public class PaymentServiceImpl implements PaymentService {
         final Payment payment = new Payment(paymentDto);
         final double total_price = product.get().getPrice() * payment.getQuantity();
         payment.setTotal_price(total_price);
-        paymentRepository.save(payment);
+        try {
+            paymentRepository.save(payment);
+        } catch (Exception e) {
+            return DefaultRes.<Payment>builder()
+                    .statusCode(StatusCode.INTERNAL_SERVER_ERROR)
+                    .responseMessage(ResponseMessage.PAYMENT_FAIL)
+                    .build();
+        }
         return DefaultRes.<Payment>builder()
                 .statusCode(StatusCode.CREATED)
                 .responseMessage(ResponseMessage.PAYMENT_SUCCESS)
