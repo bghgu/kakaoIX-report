@@ -6,7 +6,7 @@
 
 bghgu.tk:8080
 
-![db.jpg](https://github.com/project-cowalker/project-cowalker-server/blob/master/img/logical%20db.jpg)
+![db.jpg](https://github.com/bghgu/kakaoIX-report/blob/develop/image/db.jpg)
 
 * 논리적 DB 모델링
 
