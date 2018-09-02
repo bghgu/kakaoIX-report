@@ -4,11 +4,7 @@
 
 현재 서버 배포중에 있습니다.
 
-bghgu.tk:8080
-
-![db.jpg](https://github.com/bghgu/kakaoIX-report/blob/develop/image/db.jpg)
-
-* 논리적 DB 모델링
+**bghgu.tk:8080**
 
 ## URI
 
@@ -47,6 +43,13 @@ Payments API : https://github.com/bghgu/kakaoIX-report/wiki/Payments
 | GET    | /payments?offset={offset}&limit={limit}&sort={sort} | 결제 목록 조회 |
 | GET    | /payments/{paymentIdx}                              | 결제 내역 조회 |
 | POST   | /payments                                           | 상품 결제      |
+
+## DB 모델링
+
+![db.jpg](https://github.com/bghgu/kakaoIX-report/blob/develop/image/db.jpg)
+
+- 논리적 DB 모델링
+- MySQL 5.7
 
 ## 시작하기
 
