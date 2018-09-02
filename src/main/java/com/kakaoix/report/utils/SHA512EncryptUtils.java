@@ -5,6 +5,10 @@ import java.security.MessageDigest;
 /**
  * Created by ds on 2018-08-31.
  */
+
+/**
+ * 비밀번호 암호화 유틸
+ */
 public class SHA512EncryptUtils {
 
     public static String encrypt(String planText) {

@@ -16,11 +16,17 @@ import java.util.Optional;
  * Created by ds on 2018-08-31.
  */
 
+/**
+ * 상품 서비스 구현체
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
+    /**
+     * Repository 의존성 주입
+     */
     @Autowired
     public ProductServiceImpl(final ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -28,9 +34,8 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 전체 조회
-     *
-     * @param pagination
-     * @return
+     * @param pagination 페이지네이션
+     * @return 상품 리스트
      */
     @Override
     public DefaultRes<Iterable<Product>> findAll(final Pagination pagination) {
@@ -44,9 +49,8 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 정보 조회
-     *
-     * @param productIdx
-     * @return
+     * @param productIdx 상품 고유 IDX
+     * @return 상품 정보
      */
     @Override
     public DefaultRes<Product> findOne(final int productIdx) {
@@ -66,9 +70,8 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 정보 조회
-     *
-     * @param productIdx
-     * @return
+     * @param productIdx 상품 고유 IDX
+     * @return 상품
      */
     @Override
     public Optional<Product> getProduct(final int productIdx) {

@@ -9,6 +9,9 @@ import javax.persistence.*;
  * Created by ds on 2018-08-29.
  */
 
+/**
+ * 회원 도메인
+ */
 @Data
 @Entity
 @Builder

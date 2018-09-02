@@ -10,6 +10,9 @@ import java.io.IOException;
  * Created by ds on 2018-09-02.
  */
 
+/**
+ * CORS Origin 이슈를 해결하기 위한 CORS Origin Filter
+ */
 @Component
 public class SimpleCORSFilter implements Filter {
 

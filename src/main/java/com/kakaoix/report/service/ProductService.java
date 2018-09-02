@@ -10,6 +10,9 @@ import java.util.Optional;
  * Created by ds on 2018-08-29.
  */
 
+/**
+ * 상품 서비스 인터페이스
+ */
 public interface ProductService {
     DefaultRes<Iterable<Product>> findAll(final Pagination pagination);
 

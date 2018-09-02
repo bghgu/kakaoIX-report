@@ -11,6 +11,10 @@ import java.util.Date;
  * Created by ds on 2018-08-30.
  */
 
+/**
+ * 결제 도메인
+ */
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -31,6 +35,9 @@ public class Payment {
 
     private Date payment_at;
 
+    /**
+     * 상품 도메인과 join
+     */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "productIdx", insertable = false, updatable = false)
     private Product product;

@@ -29,20 +29,20 @@ Login API : https://github.com/bghgu/kakaoIX-report/wiki/Login
 
 Products API : https://github.com/bghgu/kakaoIX-report/wiki/Products
 
-| 메소드 | 경로                                                | 설명           |
-| ------ | --------------------------------------------------- | -------------- |
-| GET    | /products?offset={offset}&limit={limit}&sort={sort} | 상품 목록 조회 |
-| GET    | /products/{productIdx}                              | 상품 정보 조회 |
+| 메소드 | 경로                                                         | 설명           |
+| ------ | ------------------------------------------------------------ | -------------- |
+| GET    | /products?offset={offset}&limit={limit}&sort={sort}&order={order} | 상품 목록 조회 |
+| GET    | /products/{productIdx}                                       | 상품 정보 조회 |
 
 ### Payments
 
 Payments API : https://github.com/bghgu/kakaoIX-report/wiki/Payments
 
-| 메소드 | 경로                                                | 설명           |
-| ------ | --------------------------------------------------- | -------------- |
-| GET    | /payments?offset={offset}&limit={limit}&sort={sort} | 결제 목록 조회 |
-| GET    | /payments/{paymentIdx}                              | 결제 내역 조회 |
-| POST   | /payments                                           | 상품 결제      |
+| 메소드 | 경로                                                         | 설명           |
+| ------ | ------------------------------------------------------------ | -------------- |
+| GET    | /payments?offset={offset}&limit={limit}&sort={sort}&order={order} | 결제 목록 조회 |
+| GET    | /payments/{paymentIdx}                                       | 결제 내역 조회 |
+| POST   | /payments                                                    | 상품 결제      |
 
 ## DB 모델링
 
@@ -95,16 +95,22 @@ Payments API : https://github.com/bghgu/kakaoIX-report/wiki/Payments
 ### window 10 환경 기준
 
 - 8080 포트를 사용합니다.
+
 - `jdk8` 과 `maven` 을 설치합니다.
+
 - `JAVA_JOME` 환경변수 설정을 합니다.
+
 - `Path`에 `maven` 환경변수 설정을 합니다.
+
 - 내장 톰캣을 이용해 서버를 배포 합니다.
+
 - `application.properties` 파일이 필요합니다.
+
 - spring boot 앱 실행
 
-```
-mvn spring-boot:run
-```
+  ```
+  mvn spring-boot:run
+  ```
 
 - 중지하려면, 키보드에서 `Crtl + C`를 누릅니다.
 
@@ -113,14 +119,18 @@ mvn spring-boot:run
 * 8080 포트를 사용합니다.
 
 - `jdk8` 과 `maven` 을 설치합니다.
+
 - 백 그라운드 spring boot 앱 실행
+
 - 내장 톰캣을 사용해 배포합니다.
+
 - `application.properties` 파일이 필요합니다.
+
 - spring boot 앱 실행
 
-```
-nohup mvn spring-boot:run&
-```
+  ```
+  nohup mvn spring-boot:run&
+  ```
 
 - 중지하려면,  `netstat -tnlp` 명령어를 통해 프로세스를 kill 하십시오.
 

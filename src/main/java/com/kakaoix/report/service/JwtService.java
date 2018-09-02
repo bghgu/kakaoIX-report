@@ -1,4 +1,4 @@
-package com.kakaoix.report.utils.auth;
+package com.kakaoix.report.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
@@ -7,7 +7,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.kakaoix.report.model.Token;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import static com.auth0.jwt.JWT.require;
 
@@ -15,14 +18,24 @@ import static com.auth0.jwt.JWT.require;
  * Created by ds on 2018-09-01.
  */
 
+/**
+ * JWT 토큰 서비스
+ */
 @Slf4j
-public class Jwt {
+@Service
+public class JwtService {
 
     private static final String ISSUER = "kakaoIX";
 
-    private static final String SECRET = "vji2k@#49cn292mfo@!$mxiap@#mknvldkm3$";
+    @Value("${JWT.SALT}")
+    private String SECRET;
 
-    public static String create(final int user_idx) {
+    /**
+     * 토큰 생성
+     * @param user_idx 토큰에 담길 로그인한 사용자의 회원 고유 IDX
+     * @return 토큰
+     */
+    public String create(final int user_idx) {
         try {
             JWTCreator.Builder b = JWT.create();
             b.withIssuer(ISSUER);
@@ -31,11 +44,15 @@ public class Jwt {
         } catch (JWTCreationException JwtCreationException) {
             log.error(JwtCreationException.getMessage());
         }
-
         return null;
     }
 
-    public static Token decode(final String token) {
+    /**
+     * 토큰 해독
+     * @param token 토큰
+     * @return 로그인한 사용자의 회원 고유 IDX
+     */
+    public Token decode(final String token) {
         try {
             final JWTVerifier jwtVerifier = require(Algorithm.HMAC256(SECRET)).withIssuer(ISSUER).build();
             DecodedJWT decodedJWT = jwtVerifier.verify(token);
@@ -45,22 +62,7 @@ public class Jwt {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-
         return null;
     }
 
-    public static class Token {
-        private int user_idx;
-
-        public Token() {
-        }
-
-        public Token(final int user_idx) {
-            this.user_idx = user_idx;
-        }
-
-        public int getUser_idx() {
-            return user_idx;
-        }
-    }
 }

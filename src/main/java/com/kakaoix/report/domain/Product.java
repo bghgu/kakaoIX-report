@@ -10,6 +10,9 @@ import java.util.List;
  * Created by ds on 2018-08-29.
  */
 
+/**
+ * 상품 도메인
+ */
 @Data
 @Entity
 @Table(name = "product")
@@ -27,6 +30,9 @@ public class Product {
 
     private String image;
 
+    /**
+     * 결제 도메인과 join
+     */
     @JsonIgnore
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Payment> payment;

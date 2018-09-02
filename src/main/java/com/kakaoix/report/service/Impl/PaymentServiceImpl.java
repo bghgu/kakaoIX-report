@@ -20,6 +20,9 @@ import java.util.Optional;
  * Created by ds on 2018-08-31.
  */
 
+/**
+ * 결제 서비스 구현체
+ */
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -27,6 +30,9 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final ProductService productService;
 
+    /**
+     * Repository 의존성 주입
+     */
     @Autowired
     public PaymentServiceImpl(final PaymentRepository paymentRepository, final ProductService productService) {
         this.paymentRepository = paymentRepository;
@@ -34,9 +40,10 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     /**
-     * 결제 내역 전체 조회
-     *
-     * @return
+     * 회원이 결제한 결제 목록 조회
+     * @param userIdx 회원 고유 IDX
+     * @param pagination 페이지네이션
+     * @return 결제 목록
      */
     @Override
     public DefaultRes<Iterable<Payment>> findAll(final int userIdx, final Pagination pagination) {
@@ -49,10 +56,11 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     /**
-     * 결제 상세 조회
-     *
-     * @param payment_idx
-     * @return
+     * 결제 내역 조회
+     * 결제 한 사람만 내역을 조회 가능
+     * @param userIdx 결제한 사람의 회원 고유 IDX
+     * @param payment_idx 결제 고유 IDX
+     * @return 결제 내역
      */
     @Override
     public DefaultRes<Payment> findOne(final int userIdx, final int payment_idx) {
@@ -78,9 +86,10 @@ public class PaymentServiceImpl implements PaymentService {
 
     /**
      * 결제
-     *
-     * @param paymentDto
-     * @return
+     * 단일 품목 결제
+     * 결제 실패 시 Rollback
+     * @param paymentDto 결제 내용
+     * @return 결제 결과 메시지
      */
     @Transactional
     @Override
@@ -93,8 +102,10 @@ public class PaymentServiceImpl implements PaymentService {
                     .build();
         }
         final Payment payment = new Payment(paymentDto);
+        // 결제 대금
         final double total_price = product.get().getPrice() * payment.getQuantity();
         payment.setTotal_price(total_price);
+        // 결제 시 오류 확인
         try {
             paymentRepository.save(payment);
         } catch (Exception e) {
