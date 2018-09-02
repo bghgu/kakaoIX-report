@@ -2,6 +2,7 @@ package com.kakaoix.report.utils.auth;
 
 import com.kakaoix.report.domain.User;
 import com.kakaoix.report.model.DefaultRes;
+import com.kakaoix.report.model.Token;
 import com.kakaoix.report.service.JwtService;
 import com.kakaoix.report.service.UserService;
 import com.kakaoix.report.utils.ResponseMessage;
@@ -62,7 +63,7 @@ public class AuthAspect {
         }
 
         //토큰 해독
-        final JwtService.Token token = jwtService.decode(jwt);
+        final Token token = jwtService.decode(jwt);
 
         //토큰 검사
         if (token == null) {

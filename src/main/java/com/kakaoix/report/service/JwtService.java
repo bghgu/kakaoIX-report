@@ -32,6 +32,7 @@ public class JwtService {
 
     /**
      * 토큰 생성
+     *
      * @param user_idx 토큰에 담길 로그인한 사용자의 회원 고유 IDX
      * @return 토큰
      */
@@ -42,13 +43,14 @@ public class JwtService {
             b.withClaim("user_idx", user_idx);
             return b.sign(Algorithm.HMAC256(SECRET));
         } catch (JWTCreationException JwtCreationException) {
-            log.error(JwtCreationException.getMessage());
+            log.info(JwtCreationException.getMessage());
         }
         return null;
     }
 
     /**
      * 토큰 해독
+     *
      * @param token 토큰
      * @return 로그인한 사용자의 회원 고유 IDX
      */
@@ -58,9 +60,9 @@ public class JwtService {
             DecodedJWT decodedJWT = jwtVerifier.verify(token);
             return new Token(decodedJWT.getClaim("user_idx").asLong().intValue());
         } catch (JWTVerificationException JwtVerificationException) {
-            log.error(JwtVerificationException.getMessage());
+            log.info(JwtVerificationException.getMessage());
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.info(e.getMessage());
         }
         return null;
     }

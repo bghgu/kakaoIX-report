@@ -42,11 +42,12 @@ public class PaymentController {
 
     /**
      * 현재 로그인한 사용자의 결제 목록 조회
-     * @param jwt 토큰값
+     *
+     * @param jwt    토큰값
      * @param offset 목록 시작, 기본값 0
-     * @param limit 조회할 결제 갯수, 기본값 10
-     * @param sort 정렬 기준, 기본값 결제 고유 IDX
-     * @param order 정렬 방법, 기본값 내림차순
+     * @param limit  조회할 결제 갯수, 기본값 10
+     * @param sort   정렬 기준, 기본값 결제 고유 IDX
+     * @param order  정렬 방법, 기본값 내림차순
      * @return 결제 목록
      */
     @GetMapping("")
@@ -60,13 +61,13 @@ public class PaymentController {
     ) {
         try {
             Pagination pagination;
-            if(order.equals("asc")) {
+            if (order.equals("asc")) {
                 pagination = Pagination.builder()
                         .offset(offset)
                         .limit(limit)
                         .sort(new Sort(Sort.Direction.ASC, sort))
                         .build();
-            }else {
+            } else {
                 pagination = Pagination.builder()
                         .offset(offset)
                         .limit(limit)
@@ -83,7 +84,8 @@ public class PaymentController {
     /**
      * 결제 내역 조회
      * 자기 자신의 결제 내역만 조회 가능
-     * @param jwt 토큰값
+     *
+     * @param jwt         토큰값
      * @param payment_idx 결제 고유 IDX
      * @return 결제 내역
      */
@@ -103,7 +105,8 @@ public class PaymentController {
     /**
      * 결제
      * 단일 품목 결제
-     * @param jwt 토큰값
+     *
+     * @param jwt        토큰값
      * @param paymentDto 결제 폼
      * @return 결제 결과 메시지
      */

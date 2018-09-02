@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * 상품 도메인
  */
+
 @Data
 @Entity
 @Table(name = "product")

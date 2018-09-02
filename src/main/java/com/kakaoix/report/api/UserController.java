@@ -39,6 +39,7 @@ public class UserController {
 
     /**
      * 현재 로그인한 사용자 자신의 마이 페이지 조회
+     *
      * @param user_idx 회원 고유 IDX
      * @return 회원 정보
      */
@@ -55,6 +56,7 @@ public class UserController {
 
     /**
      * 회원 가입
+     *
      * @param userDto 회원가입 폼
      * @return 가입 결과 메시지
      */

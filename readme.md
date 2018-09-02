@@ -1,10 +1,26 @@
 # kakaoIX Report
 
-전체 API : https://github.com/bghgu/kakaoIX-report/wiki
+## 구현 내용
 
-현재 서버 배포중에 있습니다.
+1. 회원 가입, 회원 조회
+2. JWT 기반 로그인
+3. 단일 상품 구매
+4. 구매 목록 및 구매 내역 조회
+5. 상품 목록 및 상품 정보 조회
+6. Front-End 개발 못함
+7. MySql 사용
+8. Docker 배포
+9. Swagger 사용 안함
 
-**bghgu.tk:8080**
+----
+
+API 문서 : https://github.com/bghgu/kakaoIX-report/wiki
+
+docker hub에서 이미지를 다운 받으실 수 있습니다.
+
+```
+docker pull bghgu/kakaoix:report
+```
 
 ## URI
 

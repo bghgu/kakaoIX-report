@@ -12,6 +12,7 @@ import javax.persistence.*;
 /**
  * 회원 도메인
  */
+
 @Data
 @Entity
 @Builder

@@ -37,10 +37,11 @@ public class ProductController {
 
     /**
      * 상품 목록 조회
+     *
      * @param offset 목록 시작, 기본값 0
-     * @param limit 조회할 목록 갯수, 기본값 10
-     * @param sort 정렬 기준, 기본값 상품 고유 IDX
-     * @param order 정렬 방법, 기본값 내림차순
+     * @param limit  조회할 목록 갯수, 기본값 10
+     * @param sort   정렬 기준, 기본값 상품 고유 IDX
+     * @param order  정렬 방법, 기본값 내림차순
      * @return 상품 목록
      */
     @GetMapping("")
@@ -52,13 +53,13 @@ public class ProductController {
     ) {
         try {
             Pagination pagination;
-            if(order.equals("asc")) {
+            if (order.equals("asc")) {
                 pagination = Pagination.builder()
                         .offset(offset)
                         .limit(limit)
                         .sort(new Sort(Sort.Direction.ASC, sort))
                         .build();
-            }else {
+            } else {
                 pagination = Pagination.builder()
                         .offset(offset)
                         .limit(limit)
@@ -74,6 +75,7 @@ public class ProductController {
 
     /**
      * 상품 정보 조회
+     *
      * @param product_idx 상품 고유 IDX
      * @return 상품 정보
      */

@@ -1,7 +1,5 @@
 package com.kakaoix.report.model;
 
-import lombok.Data;
-
 /**
  * Created by ds on 2018-09-02.
  */

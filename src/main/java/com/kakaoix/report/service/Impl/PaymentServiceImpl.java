@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -41,7 +42,8 @@ public class PaymentServiceImpl implements PaymentService {
 
     /**
      * 회원이 결제한 결제 목록 조회
-     * @param userIdx 회원 고유 IDX
+     *
+     * @param userIdx    회원 고유 IDX
      * @param pagination 페이지네이션
      * @return 결제 목록
      */
@@ -58,7 +60,8 @@ public class PaymentServiceImpl implements PaymentService {
     /**
      * 결제 내역 조회
      * 결제 한 사람만 내역을 조회 가능
-     * @param userIdx 결제한 사람의 회원 고유 IDX
+     *
+     * @param userIdx     결제한 사람의 회원 고유 IDX
      * @param payment_idx 결제 고유 IDX
      * @return 결제 내역
      */
@@ -88,6 +91,7 @@ public class PaymentServiceImpl implements PaymentService {
      * 결제
      * 단일 품목 결제
      * 결제 실패 시 Rollback
+     *
      * @param paymentDto 결제 내용
      * @return 결제 결과 메시지
      */

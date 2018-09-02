@@ -34,6 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 전체 조회
+     *
      * @param pagination 페이지네이션
      * @return 상품 리스트
      */
@@ -49,6 +50,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 정보 조회
+     *
      * @param productIdx 상품 고유 IDX
      * @return 상품 정보
      */
@@ -70,6 +72,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 상품 정보 조회
+     *
      * @param productIdx 상품 고유 IDX
      * @return 상품
      */

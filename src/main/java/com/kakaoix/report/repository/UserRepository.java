@@ -11,7 +11,8 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User, Integer> {
     /**
      * 로그인 시 email과 password를 비교후 결과값 반환
-     * @param email 이메일
+     *
+     * @param email    이메일
      * @param password 비밀번호
      * @return user
      */

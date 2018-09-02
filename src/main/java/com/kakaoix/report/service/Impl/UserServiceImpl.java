@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 회원 정보 상세 조회
+     *
      * @param user_idx 회원 고유 IDX
      * @return
      */
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 회원 가입
+     *
      * @param userDto 회원가입 폼
      * @return
      */
@@ -90,6 +92,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 회원 조회
+     *
      * @param user_idx 회원 고유 IDX
      * @return 회원
      */
