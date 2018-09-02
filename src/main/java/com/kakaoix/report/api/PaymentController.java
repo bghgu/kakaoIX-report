@@ -35,7 +35,7 @@ public class PaymentController {
     @GetMapping("")
     @Auth
     public ResponseEntity<DefaultRes<Iterable<Payment>>> getAllPayments(
-            @RequestHeader("Authorization") String jwt,
+            @RequestHeader("Authorization") final String jwt,
             @RequestParam(value = "offset", defaultValue = "0", required = false) final int offset,
             @RequestParam(value = "limit", defaultValue = "10", required = false) final int limit,
             @RequestParam(value = "sort", defaultValue = "paymentIdx", required = false) final String sort
@@ -52,7 +52,7 @@ public class PaymentController {
     @GetMapping("/{payment_idx}")
     @Auth
     public ResponseEntity<DefaultRes<Payment>> getPayment(
-            @RequestHeader("Authorization") String jwt,
+            @RequestHeader("Authorization") final String jwt,
             @PathVariable final int payment_idx) {
         try {
             return new ResponseEntity<DefaultRes<Payment>>(paymentService.findOne(Jwt.decode(jwt).getUser_idx(), payment_idx), HttpStatus.OK);
@@ -65,7 +65,7 @@ public class PaymentController {
     @PostMapping("")
     @Auth
     public ResponseEntity<DefaultRes> payment(
-            @RequestHeader("Authorization") String jwt,
+            @RequestHeader("Authorization") final String jwt,
             @RequestBody PaymentDto paymentDto
     ) {
         try {

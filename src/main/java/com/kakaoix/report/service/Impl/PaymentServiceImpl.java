@@ -88,7 +88,7 @@ public class PaymentServiceImpl implements PaymentService {
         final Optional<Product> product = productService.getProduct(paymentDto.getProductIdx());
         if (!product.isPresent()) {
             return DefaultRes.<Payment>builder()
-                    .statusCode(StatusCode.BAD_REQUEST)
+                    .statusCode(StatusCode.NOT_FOUND)
                     .responseMessage(ResponseMessage.NOT_FOUND_PRODUCT)
                     .build();
         }
@@ -99,7 +99,7 @@ public class PaymentServiceImpl implements PaymentService {
             paymentRepository.save(payment);
         } catch (Exception e) {
             return DefaultRes.<Payment>builder()
-                    .statusCode(StatusCode.INTERNAL_SERVER_ERROR)
+                    .statusCode(StatusCode.BAD_REQUEST)
                     .responseMessage(ResponseMessage.PAYMENT_FAIL)
                     .build();
         }

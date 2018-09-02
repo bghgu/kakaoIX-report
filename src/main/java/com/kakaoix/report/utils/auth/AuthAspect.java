@@ -58,15 +58,6 @@ public class AuthAspect {
             return RES_RESPONSE_ENTITY;
         }
 
-        final Object[] params = pjp.getArgs();
-        Object[] rerunParams = new Object[params.length + 1];
-
-        for (int i = 0; i < params.length; i++) {
-            rerunParams[i] = params[i];
-        }
-
-        rerunParams[params.length] = user.get();
-
-        return pjp.proceed(params);
+        return pjp.proceed(pjp.getArgs());
     }
 }

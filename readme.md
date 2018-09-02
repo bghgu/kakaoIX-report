@@ -1,6 +1,44 @@
 # kakaoIX Report
 
-API : https://github.com/bghgu/kakaoIX-report/wiki
+전체 API : https://github.com/bghgu/kakaoIX-report/wiki
+
+## URI
+
+### Users
+
+Users API : https://github.com/bghgu/kakaoIX-report/wiki/Users
+
+| 메소드 | 경로             | 설명      |
+| ------ | ---------------- | --------- |
+| GET    | /users/{userIdx} | 회원 조회 |
+| POST   | /users           | 회원 가입 |
+
+### Login
+
+Login API : https://github.com/bghgu/kakaoIX-report/wiki/Login
+
+| 메소드 | 경로   | 설명   |
+| ------ | ------ | ------ |
+| POST   | /login | 로그인 |
+
+### Products
+
+Products API : https://github.com/bghgu/kakaoIX-report/wiki/Products
+
+| 메소드 | 경로                                                | 설명           |
+| ------ | --------------------------------------------------- | -------------- |
+| GET    | /products?offset={offset}&limit={limit}&sort={sort} | 상품 목록 조회 |
+| GET    | /products/{productIdx}                              | 상품 정보 조회 |
+
+### Payments
+
+Payments API : https://github.com/bghgu/kakaoIX-report/wiki/Payments
+
+| 메소드 | 경로                                                | 설명           |
+| ------ | --------------------------------------------------- | -------------- |
+| GET    | /payments?offset={offset}&limit={limit}&sort={sort} | 결제 목록 조회 |
+| GET    | /payments/{paymentIdx}                              | 결제 내역 조회 |
+| POST   | /payments                                           | 상품 결제      |
 
 ## 시작하기
 
@@ -75,6 +113,7 @@ nohup mvn spring-boot:run&
 
 - AWS EC2 - 애플리케이션 서버
 - AWS RDS - Mysql DB 5.7
+- AWS S3 - Cloud File Storage
 - Docker
 
 ## 사용된 도구
