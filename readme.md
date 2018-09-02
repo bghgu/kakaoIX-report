@@ -92,35 +92,51 @@ Payments API : https://github.com/bghgu/kakaoIX-report/wiki/Payments
 
 ## 실행하기
 
-window 10 환경 기준
+### window 10 환경 기준
 
-8080 포트를 사용합니다.
-
+- 8080 포트를 사용합니다.
 - `jdk8` 과 `maven` 을 설치합니다.
 - `JAVA_JOME` 환경변수 설정을 합니다.
 - `Path`에 `maven` 환경변수 설정을 합니다.
 - 내장 톰캣을 이용해 서버를 배포 합니다.
-- spring boot 앱 실행
 - `application.properties` 파일이 필요합니다.
+- spring boot 앱 실행
 
 ```
 mvn spring-boot:run
 ```
 
 - 중지하려면, 키보드에서 `Crtl + C`를 누릅니다.
-- `application.properties` 파일이 필요합니다.
 
-AWS EC2 Ubuntu 환경
+### AWS EC2 Ubuntu 환경
+
+* 8080 포트를 사용합니다.
 
 - `jdk8` 과 `maven` 을 설치합니다.
 - 백 그라운드 spring boot 앱 실행
 - 내장 톰캣을 사용해 배포합니다.
+- `application.properties` 파일이 필요합니다.
+- spring boot 앱 실행
 
 ```
 nohup mvn spring-boot:run&
 ```
 
 - 중지하려면,  `netstat -tnlp` 명령어를 통해 프로세스를 kill 하십시오.
+
+### Docker 환경
+
+* 이미지 다운로드
+
+  ```
+  docker pull bghgu/kakaoix:report
+  ```
+
+* 실행
+
+  ```
+  docker run -d -p 8080:8080 bghgu/kakaoix:report
+  ```
 
 ## 배포
 
