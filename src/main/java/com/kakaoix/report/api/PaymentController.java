@@ -2,7 +2,7 @@ package com.kakaoix.report.api;
 
 import com.kakaoix.report.domain.Payment;
 import com.kakaoix.report.model.DefaultRes;
-import com.kakaoix.report.model.Pagenation;
+import com.kakaoix.report.model.Pagination;
 import com.kakaoix.report.model.PaymentDto;
 import com.kakaoix.report.service.PaymentService;
 import com.kakaoix.report.utils.ResponseMessage;
@@ -10,6 +10,7 @@ import com.kakaoix.report.utils.StatusCode;
 import com.kakaoix.report.utils.auth.Auth;
 import com.kakaoix.report.utils.auth.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,14 +35,14 @@ public class PaymentController {
     @GetMapping("")
     @Auth
     public ResponseEntity<DefaultRes<Iterable<Payment>>> getAllPayments(
-            @RequestHeader("Authorization") String jwt,
-            @RequestParam(value = "offset", defaultValue = "1", required = false) final int offset,
+            @RequestHeader("Authorization") final String jwt,
+            @RequestParam(value = "offset", defaultValue = "0", required = false) final int offset,
             @RequestParam(value = "limit", defaultValue = "10", required = false) final int limit,
-            @RequestParam(value = "sort", defaultValue = "desc", required = false) final String sort
+            @RequestParam(value = "sort", defaultValue = "paymentIdx", required = false) final String sort
     ) {
         try {
-            final Pagenation pagenation = Pagenation.builder().offset(offset).limit(limit).sort(sort).build();
-            return new ResponseEntity<DefaultRes<Iterable<Payment>>>(paymentService.findAll(Jwt.decode(jwt).getUser_idx()), HttpStatus.OK);
+            final Pagination pagination = Pagination.builder().offset(offset).limit(limit).sort(new Sort(Sort.Direction.DESC, sort)).build();
+            return new ResponseEntity<DefaultRes<Iterable<Payment>>>(paymentService.findAll(Jwt.decode(jwt).getUser_idx(), pagination), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<DefaultRes<Iterable<Payment>>>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -51,7 +52,7 @@ public class PaymentController {
     @GetMapping("/{payment_idx}")
     @Auth
     public ResponseEntity<DefaultRes<Payment>> getPayment(
-            @RequestHeader("Authorization") String jwt,
+            @RequestHeader("Authorization") final String jwt,
             @PathVariable final int payment_idx) {
         try {
             return new ResponseEntity<DefaultRes<Payment>>(paymentService.findOne(Jwt.decode(jwt).getUser_idx(), payment_idx), HttpStatus.OK);
@@ -64,7 +65,7 @@ public class PaymentController {
     @PostMapping("")
     @Auth
     public ResponseEntity<DefaultRes> payment(
-            @RequestHeader("Authorization") String jwt,
+            @RequestHeader("Authorization") final String jwt,
             @RequestBody PaymentDto paymentDto
     ) {
         try {

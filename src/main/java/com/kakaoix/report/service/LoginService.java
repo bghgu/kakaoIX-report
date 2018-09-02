@@ -1,6 +1,5 @@
 package com.kakaoix.report.service;
 
-import com.kakaoix.report.domain.User;
 import com.kakaoix.report.model.DefaultRes;
 import com.kakaoix.report.model.TokenDto;
 
@@ -10,5 +9,4 @@ import com.kakaoix.report.model.TokenDto;
 
 public interface LoginService {
     DefaultRes<TokenDto> login(final String email, final String password);
-    DefaultRes logout();
 }

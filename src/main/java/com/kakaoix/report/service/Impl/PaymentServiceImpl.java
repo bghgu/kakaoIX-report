@@ -3,15 +3,16 @@ package com.kakaoix.report.service.Impl;
 import com.kakaoix.report.domain.Payment;
 import com.kakaoix.report.domain.Product;
 import com.kakaoix.report.model.DefaultRes;
+import com.kakaoix.report.model.Pagination;
 import com.kakaoix.report.model.PaymentDto;
 import com.kakaoix.report.repository.PaymentRepository;
 import com.kakaoix.report.service.PaymentService;
 import com.kakaoix.report.service.ProductService;
 import com.kakaoix.report.utils.ResponseMessage;
 import com.kakaoix.report.utils.StatusCode;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,7 +20,6 @@ import java.util.Optional;
  * Created by ds on 2018-08-31.
  */
 
-@Slf4j
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -35,14 +35,12 @@ public class PaymentServiceImpl implements PaymentService {
 
     /**
      * 결제 내역 전체 조회
-     * 페이지네이션 작업 안함
      *
      * @return
      */
     @Override
-    public DefaultRes<Iterable<Payment>> findAll(final int userIdx) {
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        Iterable<Payment> paymentIterable = paymentRepository.findByUserIdx(userIdx);
+    public DefaultRes<Iterable<Payment>> findAll(final int userIdx, final Pagination pagination) {
+        Iterable<Payment> paymentIterable = paymentRepository.findByUserIdx(userIdx, pagination);
         return DefaultRes.<Iterable<Payment>>builder()
                 .statusCode(StatusCode.OK)
                 .responseMessage(ResponseMessage.READ_PAYMENT_LIST)
@@ -84,19 +82,27 @@ public class PaymentServiceImpl implements PaymentService {
      * @param paymentDto
      * @return
      */
+    @Transactional
     @Override
     public DefaultRes<Payment> payment(final PaymentDto paymentDto) {
         final Optional<Product> product = productService.getProduct(paymentDto.getProductIdx());
-        if(!product.isPresent()) {
+        if (!product.isPresent()) {
             return DefaultRes.<Payment>builder()
-                    .statusCode(StatusCode.BAD_REQUEST)
+                    .statusCode(StatusCode.NOT_FOUND)
                     .responseMessage(ResponseMessage.NOT_FOUND_PRODUCT)
                     .build();
         }
         final Payment payment = new Payment(paymentDto);
         final double total_price = product.get().getPrice() * payment.getQuantity();
         payment.setTotal_price(total_price);
-        paymentRepository.save(payment);
+        try {
+            paymentRepository.save(payment);
+        } catch (Exception e) {
+            return DefaultRes.<Payment>builder()
+                    .statusCode(StatusCode.BAD_REQUEST)
+                    .responseMessage(ResponseMessage.PAYMENT_FAIL)
+                    .build();
+        }
         return DefaultRes.<Payment>builder()
                 .statusCode(StatusCode.CREATED)
                 .responseMessage(ResponseMessage.PAYMENT_SUCCESS)

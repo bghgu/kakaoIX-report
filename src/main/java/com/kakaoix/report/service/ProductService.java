@@ -2,7 +2,7 @@ package com.kakaoix.report.service;
 
 import com.kakaoix.report.domain.Product;
 import com.kakaoix.report.model.DefaultRes;
-import com.kakaoix.report.model.Pagenation;
+import com.kakaoix.report.model.Pagination;
 
 import java.util.Optional;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
  */
 
 public interface ProductService {
-    DefaultRes<Iterable<Product>> findAll(final Pagenation pagenation);
+    DefaultRes<Iterable<Product>> findAll(final Pagination pagination);
 
     DefaultRes<Product> findOne(final int productIdx);
 

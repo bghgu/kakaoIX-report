@@ -2,7 +2,7 @@ package com.kakaoix.report.api;
 
 import com.kakaoix.report.domain.User;
 import com.kakaoix.report.model.DefaultRes;
-import com.kakaoix.report.model.UserDto;
+import com.kakaoix.report.model.SignUpDto;
 import com.kakaoix.report.model.UserRes;
 import com.kakaoix.report.service.UserService;
 import com.kakaoix.report.utils.ResponseMessage;
@@ -36,19 +36,19 @@ public class UserController {
     public ResponseEntity<DefaultRes<UserRes>> getUsers(@PathVariable final int user_idx) {
         try {
             return new ResponseEntity<DefaultRes<UserRes>>(userService.findOne(user_idx), HttpStatus.OK);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<DefaultRes<UserRes>>((MultiValueMap<String, String>) FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("")
-    public ResponseEntity<DefaultRes<User>> postUsers(@RequestBody final UserDto userDto) {
+    public ResponseEntity<DefaultRes> postUsers(@RequestBody final SignUpDto signUpDto) {
         try {
-            return new ResponseEntity<DefaultRes<User>>(userService.save(userDto), HttpStatus.OK);
-        }catch(Exception e) {
+            return new ResponseEntity<DefaultRes>(userService.save(signUpDto), HttpStatus.OK);
+        } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<DefaultRes<User>>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<DefaultRes>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

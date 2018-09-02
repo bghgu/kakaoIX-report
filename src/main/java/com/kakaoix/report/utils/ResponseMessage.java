@@ -21,7 +21,7 @@ public class ResponseMessage {
     public static final String READ_PAYMENT_LIST = "Success Find Payment List";
     public static final String READ_PAYMENT_FAIL = "Fail Read Payment";
     public static final String PAYMENT_SUCCESS = "Success Payment";
-    public static final String BAD_PAYMENT = "Fail Payment";
+    public static final String PAYMENT_FAIL = "Fail Payment";
     public static final String NOT_FOUND_PAYMENT = "Not Find Payment";
 
     public static final String UNAUTHORIZED = "UnAuthorization";

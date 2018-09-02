@@ -1,14 +1,11 @@
 package com.kakaoix.report.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kakaoix.report.model.PaymentDto;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by ds on 2018-08-30.
@@ -32,7 +29,7 @@ public class Payment {
 
     private double total_price;
 
-    private LocalDateTime payment_at;
+    private Date payment_at;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "productIdx", insertable = false, updatable = false)
@@ -42,5 +39,6 @@ public class Payment {
         this.userIdx = paymentDto.getUserIdx();
         this.productIdx = paymentDto.getProductIdx();
         this.quantity = paymentDto.getQuantity();
+        this.payment_at = new Date();
     }
 }

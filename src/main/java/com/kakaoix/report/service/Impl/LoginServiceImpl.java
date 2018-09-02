@@ -30,6 +30,7 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 로그인
+     *
      * @param email
      * @param password
      * @return
@@ -49,14 +50,5 @@ public class LoginServiceImpl implements LoginService {
         return DefaultRes.<TokenDto>builder()
                 .statusCode(StatusCode.BAD_REQUEST)
                 .responseMessage(ResponseMessage.LOGIN_FAIL).build();
-    }
-
-    /**
-     * 로그아웃
-     * @return
-     */
-    @Override
-    public DefaultRes logout() {
-        return null;
     }
 }

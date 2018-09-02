@@ -52,20 +52,12 @@ public class AuthAspect {
             return RES_RESPONSE_ENTITY;
         }
 
-        Optional<User> user = userService.getUser(token.getUser_idx());
+        final Optional<User> user = userService.getUser(token.getUser_idx());
 
         if (!user.isPresent()) {
             return RES_RESPONSE_ENTITY;
         }
 
-        Object[] params = pjp.getArgs();
-        Object[] rerunParams = new Object[params.length+1];
-
-        for (int i = 0; i < params.length; i++) {
-            rerunParams[i] = params[i];
-        }
-        rerunParams[params.length] = user.get();
-
-        return pjp.proceed(params);
+        return pjp.proceed(pjp.getArgs());
     }
 }

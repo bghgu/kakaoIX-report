@@ -1,22 +1,22 @@
 package com.kakaoix.report.utils.auth;
 
+import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import lombok.Data;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.extern.slf4j.Slf4j;
+
+import static com.auth0.jwt.JWT.require;
 
 /**
  * Created by ds on 2018-09-01.
  */
 
+@Slf4j
 public class Jwt {
-
-    private static final Logger LOG = Logger.getLogger(Jwt.class.getSimpleName());
 
     private static final String ISSUER = "kakaoIX";
 
@@ -24,12 +24,12 @@ public class Jwt {
 
     public static String create(final int user_idx) {
         try {
-            JWTCreator.Builder b = com.auth0.jwt.JWT.create();
+            JWTCreator.Builder b = JWT.create();
             b.withIssuer(ISSUER);
             b.withClaim("user_idx", user_idx);
             return b.sign(Algorithm.HMAC256(SECRET));
-        } catch (JWTCreationException jce) {
-            LOG.error(jce.getMessage());
+        } catch (JWTCreationException JwtCreationException) {
+            log.error(JwtCreationException.getMessage());
         }
 
         return null;
@@ -37,13 +37,13 @@ public class Jwt {
 
     public static Token decode(final String token) {
         try {
-            JWTVerifier v = com.auth0.jwt.JWT.require(Algorithm.HMAC256(SECRET)).withIssuer(ISSUER).build();
-            DecodedJWT djwt = v.verify(token);
-            return new Token(djwt.getClaim("user_idx").asLong().intValue());
-        } catch (JWTVerificationException jve) {
-            LOG.error(jve.getMessage());
+            final JWTVerifier jwtVerifier = require(Algorithm.HMAC256(SECRET)).withIssuer(ISSUER).build();
+            DecodedJWT decodedJWT = jwtVerifier.verify(token);
+            return new Token(decodedJWT.getClaim("user_idx").asLong().intValue());
+        } catch (JWTVerificationException JwtVerificationException) {
+            log.error(JwtVerificationException.getMessage());
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            log.error(e.getMessage());
         }
 
         return null;
