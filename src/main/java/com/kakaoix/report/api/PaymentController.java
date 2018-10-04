@@ -34,7 +34,6 @@ public class PaymentController {
     /**
      * 서비스 의존성 주입
      */
-    @Autowired
     public PaymentController(final PaymentService paymentService, final JwtService jwtService) {
         this.paymentService = paymentService;
         this.jwtService = jwtService;

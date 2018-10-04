@@ -30,7 +30,6 @@ public class ProductController {
     /**
      * 서비스 의존성 주입
      */
-    @Autowired
     public ProductController(final ProductService productService) {
         this.productService = productService;
     }

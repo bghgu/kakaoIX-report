@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
     /**
      * Repository 의존성 주입
      */
-    @Autowired
     public UserServiceImpl(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }

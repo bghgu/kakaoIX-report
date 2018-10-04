@@ -32,7 +32,6 @@ public class UserController {
     /**
      * 서비스 의존성 주입
      */
-    @Autowired
     public UserController(final UserService userService) {
         this.userService = userService;
     }
@@ -43,6 +42,7 @@ public class UserController {
      * @param user_idx 회원 고유 IDX
      * @return 회원 정보
      */
+
     @GetMapping("/{user_idx}")
     @Auth
     public ResponseEntity<DefaultRes<UserRes>> getUsers(@PathVariable final int user_idx) {

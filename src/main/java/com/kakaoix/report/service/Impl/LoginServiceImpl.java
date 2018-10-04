@@ -32,7 +32,6 @@ public class LoginServiceImpl implements LoginService {
     /**
      * Repository 의존성 주입
      */
-    @Autowired
     public LoginServiceImpl(final UserRepository userRepository, final JwtService jwtService) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;

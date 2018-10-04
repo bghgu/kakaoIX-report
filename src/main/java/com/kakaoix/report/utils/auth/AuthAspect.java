@@ -46,7 +46,6 @@ public class AuthAspect {
     /**
      * Repository 의존성 주입
      */
-    @Autowired
     public AuthAspect(final HttpServletRequest httpServletRequest, final UserService userService, final JwtService jwtService) {
         this.httpServletRequest = httpServletRequest;
         this.userService = userService;

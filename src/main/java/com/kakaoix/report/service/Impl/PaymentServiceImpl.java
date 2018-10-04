@@ -34,7 +34,6 @@ public class PaymentServiceImpl implements PaymentService {
     /**
      * Repository 의존성 주입
      */
-    @Autowired
     public PaymentServiceImpl(final PaymentRepository paymentRepository, final ProductService productService) {
         this.paymentRepository = paymentRepository;
         this.productService = productService;
@@ -50,6 +49,8 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public DefaultRes<Iterable<Payment>> findAll(final int userIdx, final Pagination pagination) {
         Iterable<Payment> paymentIterable = paymentRepository.findByUserIdx(userIdx, pagination);
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuffer stringBuffer = new StringBuffer();
         return DefaultRes.<Iterable<Payment>>builder()
                 .statusCode(StatusCode.OK)
                 .responseMessage(ResponseMessage.READ_PAYMENT_LIST)

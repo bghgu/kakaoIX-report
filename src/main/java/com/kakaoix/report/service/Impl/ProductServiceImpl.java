@@ -27,7 +27,6 @@ public class ProductServiceImpl implements ProductService {
     /**
      * Repository 의존성 주입
      */
-    @Autowired
     public ProductServiceImpl(final ProductRepository productRepository) {
         this.productRepository = productRepository;
     }

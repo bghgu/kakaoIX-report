@@ -1,9 +1,6 @@
 package com.kakaoix.report.utils.auth;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Created by ds on 2018-09-01.
@@ -12,8 +9,11 @@ import java.lang.annotation.Target;
 /**
  * JWT 검증 AOP
  */
+
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
 public @interface Auth {
 
 }

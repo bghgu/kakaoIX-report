@@ -33,7 +33,6 @@ public class LoginController {
     /**
      * 서비스 의존성 주입
      */
-    @Autowired
     public LoginController(final LoginService loginService) {
         this.loginService = loginService;
     }
